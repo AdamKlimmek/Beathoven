@@ -1,3 +1,5 @@
+import './styles/index.css'
+
 import * as Tone from 'tone';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds.push(sound);
     }
 
-    const buttons = Array.from(document.getElementsByClassName('samples-button'));
+    const buttons = Array.from(document.getElementsByClassName('samples-column-button'));
 
     buttons.forEach((button, i) => {
         button.addEventListener('click', () => {
