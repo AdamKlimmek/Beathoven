@@ -69,9 +69,10 @@
 }
 
 .sequencer-row {
+    display: flex;
+    padding: 4px 0;
     border: 1px solid gray;
     margin: 10px;
-    display: flex;
 }
 
 .sequencer-row-checkbox {
@@ -81,4 +82,17 @@
 
 .sequencer-row > label {
     border: 1px solid gray;
+}
+
+.sequencer-beat-count {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: 1px solid gray;
+}
+
+.beat-count-number {
+    box-sizing: border-box;
+    width: 35px;
+    text-align: center;
 }
