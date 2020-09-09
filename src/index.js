@@ -1,7 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
+import * as Tone from 'tone';
+
+window.addEventListener('DOMContentLoaded', () => {
   
-    var para = document.createElement("P");                       // Create a <p> node
-    var t = document.createTextNode("This is a paragraph.");      // Create a text node
-    para.appendChild(t);                                          // Append the text to <p>
-    document.getElementById("root").appendChild(para);    
+    const sounds = [];
+    for (let i = 0; i < 8; i++) {
+        let sound = new Tone.Player(`../dist/samples/sample_0${i + 1}.wav`).toDestination();
+        sounds.push(sound);
+    }
+
+    const buttons = Array.from(document.getElementsByClassName('samples-button'));
+
+    buttons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+            sounds[i].start();
+        })
+    })
 });
