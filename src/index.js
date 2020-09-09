@@ -3,7 +3,50 @@ import './styles/index.css'
 import * as Tone from 'tone';
 
 window.addEventListener('DOMContentLoaded', () => {
-  
+
+    function generateSequencer() {
+        let sequencerSamplesColumn = document.getElementsByClassName('sequencer-samples-column')[0];
+        for (let i = 1; i <= 8; i++) {
+            let button = document.createElement('button');
+            button.innerHTML = "BUTTON";
+            button.className = `samples-column-button ${i}`;
+            sequencerSamplesColumn.appendChild(button)
+        }
+
+        let sequencerRows = document.getElementsByClassName('sequencer-rows')[0];
+        for (let i = 1; i <= 8; i++) {
+            let row = document.createElement('div');
+            row.classList.add('sequencer-row');
+
+            for (let j = 1; j<= 16; j++) {
+                let label = document.createElement('label');
+        
+                let input = document.createElement('input');
+                input.type = "checkbox"
+                input.classList.add('sequencer-row-checkbox')
+        
+                let span = document.createElement('span');
+                span.classList.add('sequencer-row-pad')
+
+                label.appendChild(input);
+                label.appendChild(span);
+                row.appendChild(label);
+            }
+
+            sequencerRows.appendChild(row)
+        }
+
+        let sequencerBeatCount = document.getElementsByClassName('sequencer-beat-count')[0];
+        for (let i = 1; i <= 16; i++) {
+            let div = document.createElement('div');
+            div.innerHTML = `${i}`;
+            div.classList.add('beat-count-number')
+            sequencerBeatCount.appendChild(div)
+        }
+    }
+
+    generateSequencer()
+
     const synths = [
         new Tone.Synth(),
         new Tone.Synth(),
@@ -33,23 +76,35 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    const startButton = document.body.querySelector('.start-button');
-    startButton.addEventListener('click', () => {
-        Tone.Transport.start();
-    })
-
+    let playing = false;
     let col = 0
 
-    const stopButton = document.body.querySelector('.stop-button');
-    stopButton.addEventListener('click', () => {
-        Tone.Transport.stop();
-        col = 0;
+    const playButton = document.body.querySelector('.play-button');
+    playButton.addEventListener('click', () => {
+        if (!playing) {
+            Tone.Transport.start();
+            playing = true;
+        } else {
+            Tone.Transport.stop();
+            col = 0;
+            playing = false;
+        }
+    })
+
+    
+
+    Tone.Transport.bpm.value = 120;
+    const bpmInput = document.body.querySelector('.bpm-input');
+    bpmInput.addEventListener('change', (e) => {
+        e.preventDefault();
+        Tone.Transport.bpm.value = e.currentTarget.value;
     })
 
     const resetButton = document.body.querySelector('.reset-button');
     resetButton.addEventListener('click', () => {
         Tone.Transport.stop();
         col = 0;
+        playing = false;
 
         let checkBoxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
         checkBoxes.forEach(checkbox => {
@@ -58,10 +113,6 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     Tone.Transport.scheduleRepeat(runSequence, "16n")
-
-    Tone.Transport.bpm.value = 80
-    // beats on 1, 5, 9, 13
-    // 4 beats per 16 columns
 
     function runSequence(time) {
         // console.log('col: ', col);

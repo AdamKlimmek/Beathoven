@@ -54,7 +54,7 @@
     flex-direction: column;
 
     border: 1px solid gray;
-    margin: 10px;
+    margin: 25px 10px 10px 10px;
 }
 
 .samples-column-button {
@@ -64,6 +64,11 @@
 
 .sequencer-grid {
     width: 100%;
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-rows {
     border: 1px solid gray;
     margin: 10px;
 }
@@ -87,7 +92,7 @@
 .sequencer-beat-count {
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: 10px 10px 10px 21px;
     border: 1px solid gray;
 }
 
