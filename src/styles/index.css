@@ -1,0 +1,98 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px 0;
+
+    border: 1px solid gray;
+    margin: 10px;
+    margin-bottom: 100px;
+}
+
+.header-title {
+    margin: auto;
+
+    border: 1px solid gray;
+}
+
+.header-navbar {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+
+
+.sequencer {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-controls {
+    display: flex;
+    height: 50px;
+
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-body {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-samples-column {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.samples-column-button {
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-grid {
+    width: 100%;
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-row {
+    display: flex;
+    padding: 4px 0;
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+.sequencer-row-checkbox {
+    /* border: 1px solid gray; */
+    margin: 0 10px;
+}
+
+.sequencer-row > label {
+    border: 1px solid gray;
+}
+
+.sequencer-beat-count {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: 1px solid gray;
+}
+
+.beat-count-number {
+    box-sizing: border-box;
+    width: 35px;
+    text-align: center;
+}

@@ -4,16 +4,24 @@
   "description": "a basic audio sequencer that can be used directly in the browser",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
     "webpack": "webpack --watch --mode=development"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamklimmek/keybored.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
+  "homepage": "https://github.com/adamklimmek/keybored#readme",
   "dependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
+    "@tonejs/piano": "^0.2.1",
     "babel-loader": "^8.1.0",
+    "css-loader": "^4.3.0",
     "tone": "^14.7.39",
+    "webmidi": "^2.5.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
