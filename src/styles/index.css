@@ -89,7 +89,7 @@
     border: 1px solid gray;
 }
 
-.sequencer-beat-count {
+.sequencer-beat-count-display {
     display: flex;
     flex-direction: row;
     margin: 10px 10px 10px 21px;
