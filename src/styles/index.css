@@ -1,9 +1,13 @@
+.body {
+    width: 87%;
+    margin: 0 auto;
+}
+
 .header {
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 20px 0;
-
     border: 1px solid gray;
     margin: 10px;
     margin-bottom: 100px;
@@ -23,11 +27,10 @@
     margin: 10px;
 }
 
-
-
 .sequencer {
     display: flex;
     flex-direction: column;
+    background: rgb(20, 20, 20);
 
     border: 1px solid gray;
     margin: 10px;
@@ -75,18 +78,118 @@
 
 .sequencer-row {
     display: flex;
-    padding: 4px 0;
-    border: 1px solid gray;
-    margin: 10px;
-}
-
-.sequencer-row-checkbox {
     /* border: 1px solid gray; */
-    margin: 0 10px;
 }
 
 .sequencer-row > label {
-    border: 1px solid gray;
+    /* border: 1px solid rgb(20, 20, 20); */
+    margin: 2px;
+}
+
+.sequencer-row-checkbox {
+    display: none;
+}
+
+.sequencer-row-pad {
+    display:inline-block;
+    margin-bottom: -4px;
+    width:30px;
+    height:30px;
+    line-height: 1;
+    cursor:pointer;
+    background: rgb(40, 40, 40);
+}
+
+label:nth-of-type(4n - 3) .sequencer-row-pad {
+    background: rgb(60, 60, 60);
+}
+
+.sequencer-row-pad:hover,
+label:nth-of-type(4n - 3):hover .sequencer-row-pad {
+    background: rgb(80, 80, 80);
+}
+
+.row-0:checked + .sequencer-row-pad {
+    background: rgb(255, 0, 0);
+}
+
+.row-0:checked + .sequencer-row-pad:hover {
+    background: rgb(255, 0, 0);
+    filter: brightness(85%);
+}
+
+.row-1:checked + .sequencer-row-pad {
+    background: rgb(255, 111, 0);
+}
+
+.row-1:checked + .sequencer-row-pad:hover {
+    background: rgb(255, 111, 0);
+    filter: brightness(85%);
+}
+
+.row-2:checked + .sequencer-row-pad {
+    background: rgb(254, 212, 2);
+}
+
+.row-2:checked + .sequencer-row-pad:hover {
+    background: rgb(254, 212, 2);
+    filter: brightness(85%);
+}
+
+.row-3:checked + .sequencer-row-pad {
+    background: rgb(10, 193, 0);
+}
+
+.row-3:checked + .sequencer-row-pad:hover {
+    background: rgb(10, 193, 0);
+    filter: brightness(85%);
+}
+
+.row-4:checked + .sequencer-row-pad {
+    background: rgb(10, 172, 242);
+}
+
+.row-4:checked + .sequencer-row-pad:hover {
+    background: rgb(10, 172, 242);
+    filter: brightness(85%);
+}
+
+.row-5:checked + .sequencer-row-pad {
+    background: rgb(80, 80, 255);
+}
+
+.row-5:checked + .sequencer-row-pad:hover {
+    background: rgb(80, 80, 255);
+    filter: brightness(85%);
+}
+
+.row-6:checked + .sequencer-row-pad {
+    background: rgb(149, 0, 255);
+}
+
+.row-6:checked + .sequencer-row-pad:hover {
+    background: rgb(149, 0, 255);
+    filter: brightness(85%);
+}
+
+.row-7:checked + .sequencer-row-pad {
+    background: rgb(255, 0, 238);
+}
+
+.row-7:checked + .sequencer-row-pad:hover {
+    background: rgb(255, 0, 238);
+    filter: brightness(85%);
+}
+
+.active + .sequencer-row-pad,
+label:nth-of-type(4n - 3) .active + .sequencer-row-pad {
+    box-shadow: 0 0 12px rgb(100, 100, 100);
+    background: rgb(100, 100, 100);
+}
+
+.active:checked + .sequencer-row-pad,
+label:nth-of-type(4n - 3) .active:checked + .sequencer-row-pad {
+    background: white;
 }
 
 .sequencer-beat-count-display {
@@ -98,6 +201,6 @@
 
 .beat-count-number {
     box-sizing: border-box;
-    width: 35px;
+    /* width: 35px; */
     text-align: center;
 }

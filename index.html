@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel='stylesheet' type='text/css'>
+
         <link rel="stylesheet" type="text/css" href="./src/styles/index.css" />
         <link rel="stylesheet" type="text/css" href="./src/styles/reset.css" />
 
@@ -12,50 +14,52 @@
     </head>
 
     <body>
-        <header class="header">
-            <div class="header-title">
-                Beathoven
-            </div>
-
-            <ul class="header-navbar">
-                <li class="header-navbar-links">GitHub</li>
-                <li class="header-navbar-links">LinkedIn</li>
-                <li class="header-navbar-links">AngelList</li>
-            </ul>
-        </header>
-
-        <div class="sequencer">
-            <div class="sequencer-controls">
-                <button class="play-button">
-                    PLAY
-                </button>
-
-                <form class="bpm-form">
-                    <div class="bpm-info">
-                        <span>BPM</span>
-                        <output name="currentBPM">120</output>
-                    </div>
-                    <input type="range" class="bpm-input" id="rangeInput" value="120" min="60" max="180" oninput="currentBPM.value=rangeInput.value">
-                </form>
-
-                <button class="reset-button">
-                    RESET
-                </button>
-
-                <button class="toggle-sound-kit-button">
-                    TOGGLE SOUND KIT
-                </button>
-            </div>
-
-            <div class="sequencer-body">
-                <div class="sequencer-samples-column"></div>
-
-                <div class="sequencer-grid">
-                    <div class="sequencer-rows"></div>
-                    <div class="sequencer-beat-count-display"></div>
+        <div class="body">
+            <header class="header">
+                <div class="header-title">
+                    Beathoven
                 </div>
-            </div>
+    
+                <ul class="header-navbar">
+                    <li class="header-navbar-links">GitHub</li>
+                    <li class="header-navbar-links">LinkedIn</li>
+                    <li class="header-navbar-links">AngelList</li>
+                </ul>
+            </header>
+    
+            <div class="sequencer">
+                <div class="sequencer-controls">
+                    <button class="play-button">
+                        PLAY
+                    </button>
+    
+                    <form class="bpm-form">
+                        <div class="bpm-info">
+                            <span>BPM</span>
+                            <output name="currentBPM">120</output>
+                        </div>
+                        <input type="range" class="bpm-input" id="rangeInput" value="120" min="60" max="180" oninput="currentBPM.value=rangeInput.value">
+                    </form>
+    
+                    <button class="clear-button">
+                        CLEAR
+                    </button>
 
+                    <button class="example-beat-button">
+                        EXAMPLE BEAT
+                    </button>
+                </div>
+    
+                <div class="sequencer-body">
+                    <div class="sequencer-samples-column"></div>
+    
+                    <div class="sequencer-grid">
+                        <div class="sequencer-rows"></div>
+                        <div class="sequencer-beat-count-display"></div>
+                    </div>
+                </div>
+    
+            </div>
         </div>
 
     </body>

@@ -1,5 +1,3 @@
-import './styles/index.css'
-
 import * as Tone from 'tone';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -15,29 +13,34 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function generateSequencerSampleButtons() {
         let sequencerSamplesColumn = document.getElementsByClassName('sequencer-samples-column')[0];
-        for (let i = 1; i <= 8; i++) {
+        for (let i = 0; i < 8; i++) {
             let button = document.createElement('button');
-            button.innerHTML = "BUTTON";
-            button.className = `samples-column-button ${i}`;
+            button.innerHTML = 'BUTTON';
+            button.className = `samples-column-button`;
             sequencerSamplesColumn.appendChild(button)
         }
+
+        let button = document.createElement('button');
+        button.innerHTML = 'TOGGLE KIT';
+        button.className = 'toggle-sound-kit-button';
+        sequencerSamplesColumn.appendChild(button)
     }
 
     function generateSequencerRows() {
         let sequencerRows = document.getElementsByClassName('sequencer-rows')[0];
-        for (let i = 1; i <= 8; i++) {
+        for (let i = 0; i < 8; i++) {
             let row = document.createElement('div');
-            row.classList.add('sequencer-row');
+            row.className = 'sequencer-row';
 
-            for (let j = 1; j <= 32; j++) {
+            for (let j = 0; j < 32; j++) {
                 let label = document.createElement('label');
 
                 let input = document.createElement('input');
-                input.type = "checkbox"
-                input.classList.add('sequencer-row-checkbox')
+                input.type = 'checkbox'
+                input.className = `sequencer-row-checkbox row-${i} col-${j}`;
 
                 let span = document.createElement('span');
-                span.classList.add('sequencer-row-pad')
+                span.className = 'sequencer-row-pad';
 
                 label.appendChild(input);
                 label.appendChild(span);
@@ -53,15 +56,15 @@ window.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= 32; i++) {
             let div = document.createElement('div');
             div.innerHTML = `${i}`;
-            div.classList.add('beat-count-number')
+            div.className = 'beat-count-number';
             sequencerBeatCountDisplay.appendChild(div)
         }
     }
 
     const soundKitOne = [];
     function generateSoundKitOne() {
-        for (let i = 0; i < 8; i++) {
-            let sound = new Tone.Player(`../dist/samples/sample_0${i + 1}.wav`).toDestination();
+        for (let i = 1; i <= 8; i++) {
+            let sound = new Tone.Player(`../dist/samples/sample_0${i}.wav`).toDestination();
             soundKitOne.push(sound);
         }
     }
@@ -94,8 +97,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     const rows = Array.from(document.getElementsByClassName('sequencer-row'));
+    const checkboxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
+    let columnCounter = 0
     let playing = false;
-    let col = 0
+
+
 
     const playButton = document.body.querySelector('.play-button');
     playButton.addEventListener('click', () => {
@@ -105,9 +111,14 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
             Tone.Transport.stop();
             playing = false;
-            setTimeout(() => { col = 0 }, 250);
+            setTimeout(() => { 
+                columnCounter = 0;
+                checkboxes.forEach(checkbox => { checkbox.classList.remove('active') })
+            }, 100);
         }
     })
+
+
 
     const bpmInput = document.body.querySelector('.bpm-input');
     bpmInput.addEventListener('change', (e) => {
@@ -115,17 +126,45 @@ window.addEventListener('DOMContentLoaded', () => {
         Tone.Transport.bpm.value = e.currentTarget.value;
     })
 
-    const resetButton = document.body.querySelector('.reset-button');
-    resetButton.addEventListener('click', () => {
+
+
+    const clearButton = document.body.querySelector('.clear-button');
+    clearButton.addEventListener('click', () => {
         Tone.Transport.stop();
         playing = false;
-        setTimeout(() => { col = 0 }, 250);
+        setTimeout(() => {
+            columnCounter = 0;
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.classList.remove('active');
+            })
+        }, 100);
+    })
 
-        let checkBoxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
-        checkBoxes.forEach(checkbox => {
-            checkbox.checked = false
+
+
+    const exampleBeatButton = document.body.querySelector('.example-beat-button');
+    exampleBeatButton.addEventListener('click', () => {
+        checkboxes.forEach(checkbox => { checkbox.checked = false })
+        
+        const boxesToCheck = [
+            [0, 0], [0, 6], [0, 12], [0, 16], [0, 22],
+            [1, 8], [1, 24],
+            [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24],
+            [3, 10], [3, 26],
+            [4, 8], [4, 14], [4, 24], [4, 28],
+            [5, 0], [5, 1], [5, 3], [5, 6],
+            [6, 16], [6, 17], [6, 19], [6, 22],
+            [7, 28]
+        ];
+
+        boxesToCheck.forEach((arr) => {
+            let currentBox = document.getElementsByClassName(`row-${arr[0]} col-${arr[1]}`)[0];
+            currentBox.checked = true;
         })
     })
+
+
 
     const toggleSoundKitButton = document.body.querySelector('.toggle-sound-kit-button');
     toggleSoundKitButton.addEventListener('click', () => {
@@ -134,38 +173,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
     Tone.Transport.scheduleRepeat(runSequence, '16n')
 
-    // needs to be adjusted still
     function runSequence(time) {
-        // if (currentSoundKit === 'one') {
-        //     for (let row = 0; row < rows.length; row++) {
-        //         let currentSound = soundKitOne[row];
-    
-        //         let currentRow = rows[row];
-        //         let currentPad = currentRow.querySelector(`label:nth-child(${col + 1})`)
-        //         let currentCheckBox = currentPad.querySelector('input')
-                
-        //         if (currentCheckBox.checked) currentSound.start(time);
-        //     }
-        // } else {
-        //     for (let row = 0; row < rows.length; row++) {
-        //         let currentSynth = soundKitTwo[row];
-        //         let currentPitch = pitches[row]
-    
-        //         let currentRow = rows[row];
-        //         let currentPad = currentRow.querySelector(`label:nth-child(${col + 1})`)
-        //         let currentCheckBox = currentPad.querySelector('input')
-    
-        //         if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
-        //     }
-        // }
+        let currentColumn = columnCounter % 32
 
         for (let row = 0; row < rows.length; row++) {
             let currentRow = rows[row];
-            let currentPad = currentRow.querySelector(`label:nth-child(${col + 1})`)
+            let currentPad = currentRow.querySelector(`label:nth-child(${currentColumn + 1})`)
             let currentCheckBox = currentPad.querySelector('input')
             
             if (currentSoundKit === 'one') {
@@ -178,6 +193,20 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        (col === 31) ? (col = 0) : col++;
+        Tone.Draw.schedule(time => {
+            let currentColumnPads = Array.from(document.getElementsByClassName(`col-${currentColumn}`));
+            currentColumnPads.forEach(pad => {
+                pad.classList.add('active');
+            })
+
+            let previousColumn = (currentColumn === 0) ? (31) : (currentColumn - 1);
+            let previousColumnPads = Array.from(document.getElementsByClassName(`col-${previousColumn}`));
+            previousColumnPads.forEach(pad => {
+                pad.classList.remove('active');
+            })
+        }, time)
+
+        columnCounter++;
     }
+
 });
