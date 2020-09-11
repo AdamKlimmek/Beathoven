@@ -1,65 +1,77 @@
 .body {
     height: 100vh;
-    min-width: 1183px;
+    min-width: 1200px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 5%;
-    padding-right: 5%;
     background-color: rgb(30, 30, 30);
-    font-family: Roboto;
+    font-family: 'Raleway', sans-serif;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .header {
-    /* width: 87%; */
+    position: absolute;
+    width: 100%;
+    min-width: 1200px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     background: rgb(20, 20, 20);
     color: white;
     font-size: 30px;
-    border: 1px solid gray;
-    /* padding: 20px 0; */
-    /* margin-bottom: 200px; */
+    box-shadow: 0 1px 10px hsl(0, 4%, 18%);
 }
 
 .header-title {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 10px;
-
-    border: 1px solid gray;
+    margin-left: 5%;
+    font-family: 'Tangerine', cursive;
+    font-size: 45px;
+    font-weight: 700;
 }
 
-.header-title img {
-    height: 120px;
-    width: 100px;
+.header img {
+    height: 82px;
+    width: 82px;
+    margin: 8px 5px 8px 0;
 }
 
 .title-part-one {
-    /* color: rgb(10, 172, 242); */
-    /* color: rgb(35, 35, 255); */
-
+    color: rgb(0, 255, 229);
 }
 
-.title-part-two {
-    /* color: rgb(10, 172, 242); */
-    /* color: rgb(35, 35, 255); */
-
+.title-spacer {
+    width: 1px;
+    height: 55px;
+    background: white;
+    margin: 7px;
 }
 
 .header-navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    border: 1px solid gray;
-    margin: 10px;
+    font-size: 35px;
+    margin-right: 5%;
 }
 
 .header-navbar-link {
-    margin: 5px;
+    margin: 12px;
+    display: inline-block;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.header-navbar-link:hover {
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
 }
 
 .sequencer {
@@ -68,20 +80,18 @@
     background: rgb(20, 20, 20);
     color: white;
     font-size: 20px;
-    margin: auto 0;
-
-    border: 1px solid gray;
-    border-radius: 5px;
-    /* margin: 10px; */
+    border: 10px solid rgb(20, 20, 20);
+    border-radius: 20px;
+    margin: auto;
+    box-shadow: 0 1px 10px hsl(0, 4%, 18%);
 }
 
 .sequencer-controls {
     display: flex;
     justify-content: space-between;
     height: 50px;
-
-    border: 1px solid gray;
-    /* margin: 10px; */
+    box-shadow: 0 1px 10px hsl(0, 3%, 18%);
+    margin-bottom: 15px;
 }
 
 .controls-left {
@@ -102,7 +112,11 @@
 }
 
 .bpm-info {
-    width: 91px;
+    width: 93px;
+}
+
+.bpm-input {
+    cursor: pointer;
 }
 
 .controls-right {
@@ -116,67 +130,74 @@
     margin-right: 20px;
 }
 
+.toggle-playback:hover, .example-beat-button:hover, .clear-button:hover {
+    color: rgb(200, 200, 200);
+    transition-duration: 0.3s;
+}
+
 .sequencer-body {
     display: flex;
     flex-direction: row;
-
-    /* border: 1px solid gray; */
-    /* margin: 10px; */
 }
 
 .sequencer-samples-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    /* border: 1px solid gray; */
-    /* margin: 25px 10px 10px 10px; */
+    border: 1px solid rgb(20, 20, 20);
 }
 
 .samples-column-button {
-    border: 1px solid gray;
-    margin: 5px;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background: rgb(40, 40, 40);
+    border: 1px solid rgb(20, 20, 20);
+    border-radius: 7px;
+}
+
+.samples-column-button i {
+    font-size: 16px;
+    margin: 0 12px;
+}
+
+.samples-column-button span {
+    font-size: 12.5px;
+}
+
+.samples-column-button:hover {
+    background: rgb(80, 80, 80);
+    transition-duration: 0.2s;
 }
 
 .toggle-sound-kit {
     display: flex;
     justify-content: center;
-    border: 1px solid gray;
-    border-radius: 5px;
-    background: rgb(40, 40, 40);
-    font-size: 13px;
+    align-items: center;
+    border-top: 3px solid rgb(20, 20, 20);
+    border-radius: 8px;
+    font-size: 12.5px;
 }
 
 .toggle-sound-kit .active {
-    background: rgb(60, 60, 60);
+    background: rgb(80, 80, 80);
 }
 
-.sound-kit-one-toggle {
-    padding: 3px 8px;
+.sound-kit-one-toggle, .sound-kit-two-toggle {
+    background: rgb(40, 40, 40);
+    border: 1px solid rgb(20, 20, 20);
+    font-size: 12.5px;
+    padding: 7px 20.5px;
+    border-radius: 7px;;
 }
 
-.sound-kit-two-toggle {
-    padding: 3px 8px;
-}
-
-.sequencer-grid {
-    width: 100%;
-    /* border: 1px solid gray; */
-    /* margin: 10px; */
+.sound-kit-one-toggle:hover, .sound-kit-two-toggle:hover {
+    background: rgb(80, 80, 80);
+    transition-duration: 0.2s;
 }
 
 .sequencer-rows {
-    border: 1px solid gray;
-    /* margin: 10px; */
-}
-
-.sequencer-row {
-    display: flex;
-    /* border: 1px solid gray; */
-    min-width: 1000px;
-}
-
-.sequencer-row > label {
+    border: 1px solid rgb(20, 20, 20);
 }
 
 .sequencer-row-checkbox {
@@ -185,10 +206,9 @@
 
 .sequencer-row-pad {
     display:inline-block;
-    margin-bottom: -4px;
+    margin-bottom: -5px;
     width:30px;
     height:30px;
-    /* line-height: 1; */
     cursor:pointer;
     background: rgb(40, 40, 40);
     border: 1px solid rgb(20, 20, 20);
@@ -241,11 +261,11 @@ label:nth-of-type(4n - 3):hover .sequencer-row-pad {
 }
 
 .row-4:checked + .sequencer-row-pad {
-    background: rgb(10, 172, 242);
+    background: rgb(0, 255, 229);
 }
 
 .row-4:checked + .sequencer-row-pad:hover {
-    background: rgb(10, 172, 242);
+    background: rgb(0, 255, 229);
     filter: brightness(85%);
 }
 
@@ -290,16 +310,14 @@ label:nth-of-type(4n - 3) .active:checked + .sequencer-row-pad {
 .sequencer-beat-count-display {
     display: flex;
     flex-direction: row;
-    /* margin: 10px 10px 10px 21px; */
-    border: 1px solid gray;
+    border: 1px solid rgb(20, 20, 20);
 }
 
 .beat-count-number {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
-    height: 32px;
+    height: 30px;
     width: 32px;
     font-size: 12.5px;
     color: rgb(130, 130, 130);
@@ -308,6 +326,7 @@ label:nth-of-type(4n - 3) .active:checked + .sequencer-row-pad {
 .beat-count-number:nth-of-type(4n - 3) {
     color: white;
 }
+
 .hidden {
     display: none;
 }
