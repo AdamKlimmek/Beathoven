@@ -12,22 +12,34 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateSequencerSampleButtons() {
+        let sampleDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
         let sequencerSamplesColumn = document.getElementsByClassName('sequencer-samples-column')[0];
         for (let i = 0; i < 8; i++) {
             let button = document.createElement('button');
-            button.innerHTML = 'BUTTON';
             button.className = `samples-column-button`;
+
+            let icon = document.createElement('i');
+            icon.className = 'fas fa-music';
+
+            let span = document.createElement('span');
+            span.innerHTML = sampleDescriptions[i];
+
+            button.appendChild(icon);
+            button.appendChild(span);
             sequencerSamplesColumn.appendChild(button)
         }
 
         let div = document.createElement('div');
         div.className = 'toggle-sound-kit';
+
         let buttonOne = document.createElement('button');
         buttonOne.className = 'sound-kit-one-toggle active';
         buttonOne.innerHTML = 'A';
+
         let buttonTwo = document.createElement('button');
         buttonTwo.innerHTML = 'B';
         buttonTwo.className = 'sound-kit-two-toggle';
+
         div.appendChild(buttonOne);
         div.appendChild(buttonTwo);
         sequencerSamplesColumn.appendChild(div)
@@ -102,6 +114,8 @@ window.addEventListener('DOMContentLoaded', () => {
     generateSequencer()
 
 
+
+    // reorganize / refactor 
 
     const rows = Array.from(document.getElementsByClassName('sequencer-row'));
     const checkboxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
@@ -193,6 +207,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
   
+    // end reorganize / refactor 
+
 
 
     Tone.Transport.scheduleRepeat(runSequence, '16n')
@@ -217,15 +233,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
         Tone.Draw.schedule(time => {
             let currentColumnPads = Array.from(document.getElementsByClassName(`col-${currentColumn}`));
-            currentColumnPads.forEach(pad => {
-                pad.classList.add('active');
-            })
+            currentColumnPads.forEach(pad => { pad.classList.add('active'); })
 
             let previousColumn = (currentColumn === 0) ? (31) : (currentColumn - 1);
             let previousColumnPads = Array.from(document.getElementsByClassName(`col-${previousColumn}`));
-            previousColumnPads.forEach(pad => {
-                pad.classList.remove('active');
-            })
+            previousColumnPads.forEach(pad => { pad.classList.remove('active'); })
         }, time)
 
         columnCounter++;
