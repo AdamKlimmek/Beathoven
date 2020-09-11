@@ -1,5 +1,5 @@
 {
-  "name": "keybored-master",
+  "name": "Beathoven-master",
   "version": "1.0.0",
   "description": "a basic audio sequencer that can be used directly in the browser",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adamklimmek/keybored.git"
+    "url": "git+https://github.com/adamklimmek/beathoven.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/adamklimmek/keybored#readme",
+  "homepage": "https://github.com/adamklimmek/beathoven#readme",
   "dependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
