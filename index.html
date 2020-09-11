@@ -6,48 +6,71 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel='stylesheet' type='text/css'>
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
+        
         <link rel="stylesheet" type="text/css" href="./src/styles/index.css" />
         <link rel="stylesheet" type="text/css" href="./src/styles/reset.css" />
 
         <script src="./dist/bundle.js"></script>
+        
     </head>
 
     <body>
         <div class="body">
             <header class="header">
                 <div class="header-title">
-                    Beathoven
+                    <img src="./dist/images/beethoven.png">
+                    <span class="title-part-one">Beat</span>
+                    <span class="title-part-two">hoven</span>
                 </div>
     
                 <ul class="header-navbar">
-                    <li class="header-navbar-links">GitHub</li>
-                    <li class="header-navbar-links">LinkedIn</li>
-                    <li class="header-navbar-links">AngelList</li>
+                    <li>
+                        <a href="https://github.com/AdamKlimmek/" class="header-navbar-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/adamklimmek/" class="header-navbar-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> 
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a href="https://www.linkedin.com/in/adamklimmek/" class="header-navbar-link" target="_blank">
+                            <i class="fab fa-angellist"></i>
+                        </a>
+                    </li>
                 </ul>
             </header>
     
             <div class="sequencer">
                 <div class="sequencer-controls">
-                    <button class="play-button">
-                        PLAY
-                    </button>
+                    <div class="controls-left">
+                        <button class="toggle-playback">
+                            <i class="far fa-play-circle"></i>
+                            <i class="far fa-stop-circle hidden"></i>
+                        </button>
+        
+                        <form class="bpm-form">
+                            <div class="bpm-info">
+                                <span>BPM:</span>
+                                <output name="currentBPM" class="form-output">120</output>
+                            </div>
+                            <input type="range" class="bpm-input" id="rangeInput" value="120" min="60" max="180" oninput="currentBPM.value=rangeInput.value">
+                        </form>
+                    </div>
     
-                    <form class="bpm-form">
-                        <div class="bpm-info">
-                            <span>BPM</span>
-                            <output name="currentBPM">120</output>
-                        </div>
-                        <input type="range" class="bpm-input" id="rangeInput" value="120" min="60" max="180" oninput="currentBPM.value=rangeInput.value">
-                    </form>
+                    <div class="controls-right">
+                        <button class="example-beat-button">
+                            Example
+                        </button>
     
-                    <button class="clear-button">
-                        CLEAR
-                    </button>
-
-                    <button class="example-beat-button">
-                        EXAMPLE BEAT
-                    </button>
+                        <button class="clear-button">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
                 </div>
     
                 <div class="sequencer-body">

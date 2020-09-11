@@ -1,89 +1,182 @@
 .body {
-    width: 87%;
-    margin: 0 auto;
+    height: 100vh;
+    min-width: 1183px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgb(30, 30, 30);
+    font-family: Roboto;
 }
 
 .header {
+    /* width: 87%; */
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    padding: 20px 0;
+    justify-content: space-between;
+    background: rgb(20, 20, 20);
+    color: white;
+    font-size: 30px;
     border: 1px solid gray;
-    margin: 10px;
-    margin-bottom: 100px;
+    /* padding: 20px 0; */
+    /* margin-bottom: 200px; */
 }
 
 .header-title {
-    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
 
     border: 1px solid gray;
+}
+
+.header-title img {
+    height: 120px;
+    width: 100px;
+}
+
+.title-part-one {
+    /* color: rgb(10, 172, 242); */
+    /* color: rgb(35, 35, 255); */
+
+}
+
+.title-part-two {
+    /* color: rgb(10, 172, 242); */
+    /* color: rgb(35, 35, 255); */
+
 }
 
 .header-navbar {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     border: 1px solid gray;
     margin: 10px;
+}
+
+.header-navbar-link {
+    margin: 5px;
 }
 
 .sequencer {
     display: flex;
     flex-direction: column;
     background: rgb(20, 20, 20);
+    color: white;
+    font-size: 20px;
+    margin: auto 0;
 
     border: 1px solid gray;
-    margin: 10px;
+    border-radius: 5px;
+    /* margin: 10px; */
 }
 
 .sequencer-controls {
     display: flex;
+    justify-content: space-between;
     height: 50px;
 
     border: 1px solid gray;
-    margin: 10px;
+    /* margin: 10px; */
+}
+
+.controls-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.toggle-playback {
+    font-size: 22px;
+}
+
+.bpm-form {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.bpm-info {
+    width: 91px;
+}
+
+.controls-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.example-beat-button {
+    margin-right: 20px;
 }
 
 .sequencer-body {
     display: flex;
     flex-direction: row;
 
-    border: 1px solid gray;
-    margin: 10px;
+    /* border: 1px solid gray; */
+    /* margin: 10px; */
 }
 
 .sequencer-samples-column {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    border: 1px solid gray;
-    margin: 25px 10px 10px 10px;
+    /* border: 1px solid gray; */
+    /* margin: 25px 10px 10px 10px; */
 }
 
 .samples-column-button {
     border: 1px solid gray;
-    margin: 10px;
+    margin: 5px;
+}
+
+.toggle-sound-kit {
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: rgb(40, 40, 40);
+    font-size: 13px;
+}
+
+.toggle-sound-kit .active {
+    background: rgb(60, 60, 60);
+}
+
+.sound-kit-one-toggle {
+    padding: 3px 8px;
+}
+
+.sound-kit-two-toggle {
+    padding: 3px 8px;
 }
 
 .sequencer-grid {
     width: 100%;
-    border: 1px solid gray;
-    margin: 10px;
+    /* border: 1px solid gray; */
+    /* margin: 10px; */
 }
 
 .sequencer-rows {
     border: 1px solid gray;
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 .sequencer-row {
     display: flex;
     /* border: 1px solid gray; */
+    min-width: 1000px;
 }
 
 .sequencer-row > label {
-    /* border: 1px solid rgb(20, 20, 20); */
-    margin: 2px;
 }
 
 .sequencer-row-checkbox {
@@ -95,9 +188,11 @@
     margin-bottom: -4px;
     width:30px;
     height:30px;
-    line-height: 1;
+    /* line-height: 1; */
     cursor:pointer;
     background: rgb(40, 40, 40);
+    border: 1px solid rgb(20, 20, 20);
+    border-radius: 7px;
 }
 
 label:nth-of-type(4n - 3) .sequencer-row-pad {
@@ -155,11 +250,11 @@ label:nth-of-type(4n - 3):hover .sequencer-row-pad {
 }
 
 .row-5:checked + .sequencer-row-pad {
-    background: rgb(80, 80, 255);
+    background: rgb(35, 35, 255);
 }
 
 .row-5:checked + .sequencer-row-pad:hover {
-    background: rgb(80, 80, 255);
+    background: rgb(35, 35, 255);
     filter: brightness(85%);
 }
 
@@ -184,23 +279,35 @@ label:nth-of-type(4n - 3):hover .sequencer-row-pad {
 .active + .sequencer-row-pad,
 label:nth-of-type(4n - 3) .active + .sequencer-row-pad {
     box-shadow: 0 0 12px rgb(100, 100, 100);
-    background: rgb(100, 100, 100);
+    background: rgb(90, 90, 90);
 }
 
 .active:checked + .sequencer-row-pad,
 label:nth-of-type(4n - 3) .active:checked + .sequencer-row-pad {
-    background: white;
+    background: rgb(200, 200, 200);
 }
 
 .sequencer-beat-count-display {
     display: flex;
     flex-direction: row;
-    margin: 10px 10px 10px 21px;
+    /* margin: 10px 10px 10px 21px; */
     border: 1px solid gray;
 }
 
 .beat-count-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
-    /* width: 35px; */
-    text-align: center;
+    height: 32px;
+    width: 32px;
+    font-size: 12.5px;
+    color: rgb(130, 130, 130);
+}
+
+.beat-count-number:nth-of-type(4n - 3) {
+    color: white;
+}
+.hidden {
+    display: none;
 }

@@ -20,10 +20,17 @@ window.addEventListener('DOMContentLoaded', () => {
             sequencerSamplesColumn.appendChild(button)
         }
 
-        let button = document.createElement('button');
-        button.innerHTML = 'TOGGLE KIT';
-        button.className = 'toggle-sound-kit-button';
-        sequencerSamplesColumn.appendChild(button)
+        let div = document.createElement('div');
+        div.className = 'toggle-sound-kit';
+        let buttonOne = document.createElement('button');
+        buttonOne.className = 'sound-kit-one-toggle active';
+        buttonOne.innerHTML = 'A';
+        let buttonTwo = document.createElement('button');
+        buttonTwo.innerHTML = 'B';
+        buttonTwo.className = 'sound-kit-two-toggle';
+        div.appendChild(buttonOne);
+        div.appendChild(buttonTwo);
+        sequencerSamplesColumn.appendChild(div)
     }
 
     function generateSequencerRows() {
@@ -61,32 +68,32 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const soundKitOne = [];
+    const soundKitA = [];
     function generateSoundKitOne() {
         for (let i = 1; i <= 8; i++) {
             let sound = new Tone.Player(`../dist/samples/sample_0${i}.wav`).toDestination();
-            soundKitOne.push(sound);
+            soundKitA.push(sound);
         }
     }
 
-    const soundKitTwo = [];
+    const soundKitB = [];
     const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']
     function generateSoundKitTwo() {
         for (let i = 0; i < 8; i++) {
             let sound = new Tone.Synth().toDestination();
-            soundKitTwo.push(sound);
+            soundKitB.push(sound);
         }
     }
 
-    let currentSoundKit = 'one';
+    let currentSoundKit = 'A';
     function generateSampleButtonEventListeners() {
         let sampleButtons = Array.from(document.getElementsByClassName('samples-column-button'));
         sampleButtons.forEach((button, i) => {
             button.addEventListener('click', () => {
-                if (currentSoundKit === 'one') {
-                    soundKitOne[i].start();
+                if (currentSoundKit === 'A') {
+                    soundKitA[i].start();
                 } else {
-                    soundKitTwo[i].triggerAttackRelease(pitches[i], '16n');
+                    soundKitB[i].triggerAttackRelease(pitches[i], '16n');
                 }
             })
         })
@@ -99,24 +106,28 @@ window.addEventListener('DOMContentLoaded', () => {
     const rows = Array.from(document.getElementsByClassName('sequencer-row'));
     const checkboxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
     let columnCounter = 0
-    let playing = false;
+    
 
 
-
-    const playButton = document.body.querySelector('.play-button');
-    playButton.addEventListener('click', () => {
-        if (!playing) {
+    function togglePlay() {
+        if (stopButton.classList.contains('hidden')) {
             Tone.Transport.start();
-            playing = true;
+            playButton.classList.add('hidden');
+            stopButton.classList.remove('hidden');
         } else {
             Tone.Transport.stop();
-            playing = false;
-            setTimeout(() => { 
+            playButton.classList.remove('hidden');
+            stopButton.classList.add('hidden');
+            setTimeout(() => {
                 columnCounter = 0;
                 checkboxes.forEach(checkbox => { checkbox.classList.remove('active') })
             }, 100);
         }
-    })
+    }
+    const togglePlayback = document.body.querySelector('.toggle-playback');
+    const playButton = document.body.querySelector('.fa-play-circle');
+    const stopButton = document.body.querySelector('.fa-stop-circle');
+    togglePlayback.addEventListener('click', () => { togglePlay() });
 
 
 
@@ -131,13 +142,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const clearButton = document.body.querySelector('.clear-button');
     clearButton.addEventListener('click', () => {
         Tone.Transport.stop();
-        playing = false;
         setTimeout(() => {
             columnCounter = 0;
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
                 checkbox.classList.remove('active');
             })
+            if (playButton.classList.contains('hidden')) togglePlay();
         }, 100);
     })
 
@@ -165,12 +176,23 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
 
-
-    const toggleSoundKitButton = document.body.querySelector('.toggle-sound-kit-button');
-    toggleSoundKitButton.addEventListener('click', () => {
-        (currentSoundKit === 'one') ? (currentSoundKit = 'two') : (currentSoundKit = 'one');
+    const soundKitAButton = document.body.querySelector('.sound-kit-one-toggle');
+    const soundKitBButton = document.body.querySelector('.sound-kit-two-toggle');
+    soundKitAButton.addEventListener('click', () => {
+        if (!soundKitAButton.classList.contains('active')) {
+            soundKitAButton.classList.add('active');
+            soundKitBButton.classList.remove('active');
+            currentSoundKit = 'A';
+        }
     })
-
+    soundKitBButton.addEventListener('click', () => {
+        if (!soundKitBButton.classList.contains('active')) {
+            soundKitBButton.classList.add('active');
+            soundKitAButton.classList.remove('active');
+            currentSoundKit = 'B';
+        }
+    })
+  
 
 
     Tone.Transport.scheduleRepeat(runSequence, '16n')
@@ -183,11 +205,11 @@ window.addEventListener('DOMContentLoaded', () => {
             let currentPad = currentRow.querySelector(`label:nth-child(${currentColumn + 1})`)
             let currentCheckBox = currentPad.querySelector('input')
             
-            if (currentSoundKit === 'one') {
-                let currentSound = soundKitOne[row];
+            if (currentSoundKit === 'A') {
+                let currentSound = soundKitA[row];
                 if (currentCheckBox.checked) currentSound.start(time);
             } else {
-                let currentSynth = soundKitTwo[row];
+                let currentSynth = soundKitB[row];
                 let currentPitch = pitches[row]
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
