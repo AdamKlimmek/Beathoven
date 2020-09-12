@@ -1,5 +1,5 @@
 {
-  "name": "Beathoven-master",
+  "name": "Beathoven",
   "version": "1.0.0",
   "description": "a basic audio sequencer that can be used directly in the browser",
   "main": "index.js",
