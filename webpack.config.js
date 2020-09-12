@@ -28,7 +28,15 @@ module.exports = {
             {
                 test: /\.(mp3|wav)$/,
                 use: [
-                    'file-loader',
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            // outputPath: '../audio/',
+                            // publicPath: 'audio/',
+                            // useRelativePaths: true
+                        }
+                    }
                 ]
             },
         ]
