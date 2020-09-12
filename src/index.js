@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function generateSequencerSampleButtons() {
         let sampleDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
-        let sequencerSamplesColumn = document.getElementsByClassName('sequencer-samples-column')[0];
+        let sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
         for (let i = 0; i < 8; i++) {
             let button = document.createElement('button');
             button.className = `samples-column-button`;
@@ -33,12 +33,12 @@ window.addEventListener('DOMContentLoaded', () => {
         div.className = 'toggle-sound-kit';
 
         let buttonOne = document.createElement('button');
-        buttonOne.className = 'sound-kit-one-toggle active';
+        buttonOne.className = 'sound-kit-a-toggle active';
         buttonOne.innerHTML = 'A';
 
         let buttonTwo = document.createElement('button');
         buttonTwo.innerHTML = 'B';
-        buttonTwo.className = 'sound-kit-two-toggle';
+        buttonTwo.className = 'sound-kit-b-toggle';
 
         div.appendChild(buttonOne);
         div.appendChild(buttonTwo);
@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateSequencerRows() {
-        let sequencerRows = document.getElementsByClassName('sequencer-rows')[0];
+        let sequencerRows = document.body.querySelector('.sequencer-rows');
         for (let i = 0; i < 8; i++) {
             let row = document.createElement('div');
             row.className = 'sequencer-row';
@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateSequencerBeatCountDisplay() {
-        let sequencerBeatCountDisplay = document.getElementsByClassName('sequencer-beat-count-display')[0];
+        let sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
         for (let i = 1; i <= 32; i++) {
             let div = document.createElement('div');
             div.innerHTML = `${i}`;
@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const soundKitB = [];
-    const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']
+    const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
     function generateSoundKitTwo() {
         for (let i = 0; i < 8; i++) {
             let sound = new Tone.Synth().toDestination();
@@ -99,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let currentSoundKit = 'A';
     function generateSampleButtonEventListeners() {
-        let sampleButtons = Array.from(document.getElementsByClassName('samples-column-button'));
+        let sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
         sampleButtons.forEach((button, i) => {
             button.addEventListener('click', () => {
                 if (currentSoundKit === 'A') {
@@ -117,12 +117,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // reorganize / refactor 
 
-    const rows = Array.from(document.getElementsByClassName('sequencer-row'));
-    const checkboxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
+    const rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
+    const checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
     let columnCounter = 0
     
 
 
+    const playButton = document.body.querySelector('.fa-play-circle');
+    const stopButton = document.body.querySelector('.fa-stop-circle');
+    const togglePlayback = document.body.querySelector('.toggle-playback');
+    togglePlayback.addEventListener('click', () => { togglePlay() });
     function togglePlay() {
         if (stopButton.classList.contains('hidden')) {
             Tone.Transport.start();
@@ -138,11 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
     }
-    const togglePlayback = document.body.querySelector('.toggle-playback');
-    const playButton = document.body.querySelector('.fa-play-circle');
-    const stopButton = document.body.querySelector('.fa-stop-circle');
-    togglePlayback.addEventListener('click', () => { togglePlay() });
-
+    
 
 
     const bpmInput = document.body.querySelector('.bpm-input');
@@ -187,11 +187,15 @@ window.addEventListener('DOMContentLoaded', () => {
             let currentBox = document.getElementsByClassName(`row-${arr[0]} col-${arr[1]}`)[0];
             currentBox.checked = true;
         })
+
+        bpmInput.value = 120;
+        let bpmOutput = document.body.querySelector('.form-output');
+        bpmOutput.innerHTML = 120;
+        Tone.Transport.bpm.value = 120;
     })
 
-
-    const soundKitAButton = document.body.querySelector('.sound-kit-one-toggle');
-    const soundKitBButton = document.body.querySelector('.sound-kit-two-toggle');
+    const soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
+    const soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
     soundKitAButton.addEventListener('click', () => {
         if (!soundKitAButton.classList.contains('active')) {
             soundKitAButton.classList.add('active');
@@ -199,6 +203,7 @@ window.addEventListener('DOMContentLoaded', () => {
             currentSoundKit = 'A';
         }
     })
+
     soundKitBButton.addEventListener('click', () => {
         if (!soundKitBButton.classList.contains('active')) {
             soundKitBButton.classList.add('active');

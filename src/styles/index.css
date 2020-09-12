@@ -183,7 +183,7 @@
     background: rgb(80, 80, 80);
 }
 
-.sound-kit-one-toggle, .sound-kit-two-toggle {
+.sound-kit-a-toggle, .sound-kit-b-toggle {
     background: rgb(40, 40, 40);
     border: 1px solid rgb(20, 20, 20);
     font-size: 12.5px;
@@ -191,7 +191,7 @@
     border-radius: 7px;;
 }
 
-.sound-kit-one-toggle:hover, .sound-kit-two-toggle:hover {
+.sound-kit-a-toggle:hover, .sound-kit-b-toggle:hover {
     background: rgb(80, 80, 80);
     transition-duration: 0.2s;
 }

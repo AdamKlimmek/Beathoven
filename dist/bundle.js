@@ -44476,7 +44476,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function generateSequencerSampleButtons() {
     var sampleDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
-    var sequencerSamplesColumn = document.getElementsByClassName('sequencer-samples-column')[0];
+    var sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
 
     for (var i = 0; i < 8; i++) {
       var button = document.createElement('button');
@@ -44493,18 +44493,18 @@ window.addEventListener('DOMContentLoaded', function () {
     var div = document.createElement('div');
     div.className = 'toggle-sound-kit';
     var buttonOne = document.createElement('button');
-    buttonOne.className = 'sound-kit-one-toggle active';
+    buttonOne.className = 'sound-kit-a-toggle active';
     buttonOne.innerHTML = 'A';
     var buttonTwo = document.createElement('button');
     buttonTwo.innerHTML = 'B';
-    buttonTwo.className = 'sound-kit-two-toggle';
+    buttonTwo.className = 'sound-kit-b-toggle';
     div.appendChild(buttonOne);
     div.appendChild(buttonTwo);
     sequencerSamplesColumn.appendChild(div);
   }
 
   function generateSequencerRows() {
-    var sequencerRows = document.getElementsByClassName('sequencer-rows')[0];
+    var sequencerRows = document.body.querySelector('.sequencer-rows');
 
     for (var i = 0; i < 8; i++) {
       var row = document.createElement('div');
@@ -44527,7 +44527,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   function generateSequencerBeatCountDisplay() {
-    var sequencerBeatCountDisplay = document.getElementsByClassName('sequencer-beat-count-display')[0];
+    var sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
 
     for (var i = 1; i <= 32; i++) {
       var div = document.createElement('div');
@@ -44547,7 +44547,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   var soundKitB = [];
-  var pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+  var pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
 
   function generateSoundKitTwo() {
     for (var i = 0; i < 8; i++) {
@@ -44559,7 +44559,7 @@ window.addEventListener('DOMContentLoaded', function () {
   var currentSoundKit = 'A';
 
   function generateSampleButtonEventListeners() {
-    var sampleButtons = Array.from(document.getElementsByClassName('samples-column-button'));
+    var sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
     sampleButtons.forEach(function (button, i) {
       button.addEventListener('click', function () {
         if (currentSoundKit === 'A') {
@@ -44573,9 +44573,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
   generateSequencer(); // reorganize / refactor 
 
-  var rows = Array.from(document.getElementsByClassName('sequencer-row'));
-  var checkboxes = Array.from(document.getElementsByClassName('sequencer-row-checkbox'));
+  var rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
+  var checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
   var columnCounter = 0;
+  var playButton = document.body.querySelector('.fa-play-circle');
+  var stopButton = document.body.querySelector('.fa-stop-circle');
+  var togglePlayback = document.body.querySelector('.toggle-playback');
+  togglePlayback.addEventListener('click', function () {
+    togglePlay();
+  });
 
   function togglePlay() {
     if (stopButton.classList.contains('hidden')) {
@@ -44595,12 +44601,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  var togglePlayback = document.body.querySelector('.toggle-playback');
-  var playButton = document.body.querySelector('.fa-play-circle');
-  var stopButton = document.body.querySelector('.fa-stop-circle');
-  togglePlayback.addEventListener('click', function () {
-    togglePlay();
-  });
   var bpmInput = document.body.querySelector('.bpm-input');
   bpmInput.addEventListener('change', function (e) {
     e.preventDefault();
@@ -44628,9 +44628,13 @@ window.addEventListener('DOMContentLoaded', function () {
       var currentBox = document.getElementsByClassName("row-".concat(arr[0], " col-").concat(arr[1]))[0];
       currentBox.checked = true;
     });
+    bpmInput.value = 120;
+    var bpmOutput = document.body.querySelector('.form-output');
+    bpmOutput.innerHTML = 120;
+    tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value = 120;
   });
-  var soundKitAButton = document.body.querySelector('.sound-kit-one-toggle');
-  var soundKitBButton = document.body.querySelector('.sound-kit-two-toggle');
+  var soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
+  var soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
   soundKitAButton.addEventListener('click', function () {
     if (!soundKitAButton.classList.contains('active')) {
       soundKitAButton.classList.add('active');
