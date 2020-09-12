@@ -86,110 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./dist/samples/sample_01.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_01.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_01.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_02.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_02.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_02.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_03.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_03.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_03.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_04.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_04.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_04.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_05.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_05.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_05.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_06.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_06.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_06.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_07.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_07.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_07.wav");
-
-/***/ }),
-
-/***/ "./dist/samples/sample_08.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_08.wav ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_08.wav");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -44567,22 +44463,6 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
-/* harmony import */ var _dist_samples_sample_01_wav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dist/samples/sample_01.wav */ "./dist/samples/sample_01.wav");
-/* harmony import */ var _dist_samples_sample_02_wav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dist/samples/sample_02.wav */ "./dist/samples/sample_02.wav");
-/* harmony import */ var _dist_samples_sample_03_wav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dist/samples/sample_03.wav */ "./dist/samples/sample_03.wav");
-/* harmony import */ var _dist_samples_sample_04_wav__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dist/samples/sample_04.wav */ "./dist/samples/sample_04.wav");
-/* harmony import */ var _dist_samples_sample_05_wav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dist/samples/sample_05.wav */ "./dist/samples/sample_05.wav");
-/* harmony import */ var _dist_samples_sample_06_wav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../dist/samples/sample_06.wav */ "./dist/samples/sample_06.wav");
-/* harmony import */ var _dist_samples_sample_07_wav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../dist/samples/sample_07.wav */ "./dist/samples/sample_07.wav");
-/* harmony import */ var _dist_samples_sample_08_wav__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../dist/samples/sample_08.wav */ "./dist/samples/sample_08.wav");
-
-
-
-
-
-
-
-
 
 window.addEventListener('DOMContentLoaded', function () {
   function generateSequencer() {

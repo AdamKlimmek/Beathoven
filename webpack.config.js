@@ -25,20 +25,17 @@ module.exports = {
                     'css-loader',
                 ]
             },
-            {
-                test: /\.(mp3|wav)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            // outputPath: '../audio/',
-                            // publicPath: 'audio/',
-                            // useRelativePaths: true
-                        }
-                    }
-                ]
-            },
+            // {
+            //     test: /\.(mp3|wav)$/,
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 name: '[name].[ext]',
+            //             }
+            //         }
+            //     ]
+            // },
         ]
     },
     devtool: 'source-map',
