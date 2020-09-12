@@ -1,9 +1,16 @@
 import * as Tone from 'tone';
 
-import test from '../dist/samples/sample_01.wav';
+import sample1 from '../dist/samples/sample_01.wav';
+import sample2 from '../dist/samples/sample_02.wav';
+import sample3 from '../dist/samples/sample_03.wav';
+import sample4 from '../dist/samples/sample_04.wav';
+import sample5 from '../dist/samples/sample_05.wav';
+import sample6 from '../dist/samples/sample_06.wav';
+import sample7 from '../dist/samples/sample_07.wav';
+import sample8 from '../dist/samples/sample_08.wav';
 
 window.addEventListener('DOMContentLoaded', () => {
-
+    
     function generateSequencer() {
         generateSequencerSampleButtons();
         generateSequencerRows();
@@ -85,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const soundKitA = [];
     function generateSoundKitOne() {
         for (let i = 1; i <= 8; i++) {
-            let sound = new Tone.Player(`./dist/sample_01.wav`).toDestination();
+            let sound = new Tone.Player(`./dist/sample_0${i}.wav`).toDestination();
             soundKitA.push(sound);
         }
     }
