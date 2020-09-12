@@ -86,6 +86,19 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./dist/samples/sample_01.wav":
+/*!************************************!*\
+  !*** ./dist/samples/sample_01.wav ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "sample_01.wav");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -44463,6 +44476,8 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
+/* harmony import */ var _dist_samples_sample_01_wav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dist/samples/sample_01.wav */ "./dist/samples/sample_01.wav");
+
 
 window.addEventListener('DOMContentLoaded', function () {
   function generateSequencer() {
@@ -44541,7 +44556,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function generateSoundKitOne() {
     for (var i = 1; i <= 8; i++) {
-      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"]("../dist/samples/sample_0".concat(i, ".wav")).toDestination();
+      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"]("./dist/sample_01.wav").toDestination();
       soundKitA.push(sound);
     }
   }
