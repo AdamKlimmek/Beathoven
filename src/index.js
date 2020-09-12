@@ -1,7 +1,5 @@
 import * as Tone from 'tone';
 
-let audioUrl1 = require(`../dist/samples/sample_01.wav`);
-
 window.addEventListener('DOMContentLoaded', () => {
 
     function generateSequencer() {
@@ -85,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const soundKitA = [];
     function generateSoundKitOne() {
         for (let i = 1; i <= 8; i++) {
-            let sound = new Tone.Player(audioUrl1).toDestination();
+            let sound = new Tone.Player(`../dist/samples/sample_0${i}.wav`).toDestination();
             soundKitA.push(sound);
         }
     }

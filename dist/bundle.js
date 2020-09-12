@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./dist/samples/sample_01.wav":
-/*!************************************!*\
-  !*** ./dist/samples/sample_01.wav ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module parse failed: Unexpected character '�' (1:4)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n(Source code omitted for this binary file)");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -44475,9 +44464,6 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
 
-
-var audioUrl1 = __webpack_require__(/*! ../dist/samples/sample_01.wav */ "./dist/samples/sample_01.wav");
-
 window.addEventListener('DOMContentLoaded', function () {
   function generateSequencer() {
     generateSequencerSampleButtons();
@@ -44555,7 +44541,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function generateSoundKitOne() {
     for (var i = 1; i <= 8; i++) {
-      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"](audioUrl1).toDestination();
+      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"]("../dist/samples/sample_0".concat(i, ".wav")).toDestination();
       soundKitA.push(sound);
     }
   }
