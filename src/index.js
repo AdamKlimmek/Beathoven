@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import { customOne, customTwo, twinkleTwinkle, maryLamb } from './presets.js';
+import { a1, a2, a3, b1, b2 } from './presets.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -216,17 +216,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    const presetOneButton = document.body.querySelector('.preset-one');
-    presetOneButton.addEventListener('click', () => initializePreset('A', 120, customOne));
+    const presetA1 = document.body.querySelector('.preset-a1');
+    presetA1.addEventListener('click', () => initializePreset('A', 120, a1));
     
-    const presetTwoButton = document.body.querySelector('.preset-two');
-    presetTwoButton.addEventListener('click', () => initializePreset('A', 60, customTwo));
+    const presetA2 = document.body.querySelector('.preset-a2');
+    presetA2.addEventListener('click', () => initializePreset('A', 60, a2));
 
-    const presetThreeButton = document.body.querySelector('.preset-three');
-    presetThreeButton.addEventListener('click', () => initializePreset('B', 70, twinkleTwinkle));
+    const presetA3 = document.body.querySelector('.preset-a3');
+    presetA3.addEventListener('click', () => initializePreset('A', 90, a3));
 
-    const presetFourButton = document.body.querySelector('.preset-four');
-    presetFourButton.addEventListener('click', () => initializePreset('B', 60, maryLamb));
+    const presetB1 = document.body.querySelector('.preset-b1');
+    presetB1.addEventListener('click', () => initializePreset('B', 70, b1));
+
+    const presetB2 = document.body.querySelector('.preset-b2');
+    presetB2.addEventListener('click', () => initializePreset('B', 60, b2));
 
     function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
         clear();

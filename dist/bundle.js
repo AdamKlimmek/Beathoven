@@ -44688,21 +44688,25 @@ window.addEventListener('DOMContentLoaded', function () {
       toggleDropdown();
     }
   });
-  var presetOneButton = document.body.querySelector('.preset-one');
-  presetOneButton.addEventListener('click', function () {
-    return initializePreset('A', 120, _presets_js__WEBPACK_IMPORTED_MODULE_1__["customOne"]);
+  var presetA1 = document.body.querySelector('.preset-a1');
+  presetA1.addEventListener('click', function () {
+    return initializePreset('A', 120, _presets_js__WEBPACK_IMPORTED_MODULE_1__["a1"]);
   });
-  var presetTwoButton = document.body.querySelector('.preset-two');
-  presetTwoButton.addEventListener('click', function () {
-    return initializePreset('A', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["customTwo"]);
+  var presetA2 = document.body.querySelector('.preset-a2');
+  presetA2.addEventListener('click', function () {
+    return initializePreset('A', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["a2"]);
   });
-  var presetThreeButton = document.body.querySelector('.preset-three');
-  presetThreeButton.addEventListener('click', function () {
-    return initializePreset('B', 70, _presets_js__WEBPACK_IMPORTED_MODULE_1__["twinkleTwinkle"]);
+  var presetA3 = document.body.querySelector('.preset-a3');
+  presetA3.addEventListener('click', function () {
+    return initializePreset('A', 90, _presets_js__WEBPACK_IMPORTED_MODULE_1__["a3"]);
   });
-  var presetFourButton = document.body.querySelector('.preset-four');
-  presetFourButton.addEventListener('click', function () {
-    return initializePreset('B', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["maryLamb"]);
+  var presetB1 = document.body.querySelector('.preset-b1');
+  presetB1.addEventListener('click', function () {
+    return initializePreset('B', 70, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b1"]);
+  });
+  var presetB2 = document.body.querySelector('.preset-b2');
+  presetB2.addEventListener('click', function () {
+    return initializePreset('B', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b2"]);
   });
 
   function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
@@ -44760,19 +44764,21 @@ window.addEventListener('DOMContentLoaded', function () {
 /*!************************!*\
   !*** ./src/presets.js ***!
   \************************/
-/*! exports provided: customOne, customTwo, twinkleTwinkle, maryLamb */
+/*! exports provided: a1, a2, a3, b1, b2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customOne", function() { return customOne; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customTwo", function() { return customTwo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "twinkleTwinkle", function() { return twinkleTwinkle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maryLamb", function() { return maryLamb; });
-var customOne = [[0, 0], [0, 6], [0, 12], [0, 16], [0, 22], [1, 8], [1, 24], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24], [3, 10], [3, 26], [4, 8], [4, 14], [4, 24], [4, 28], [5, 0], [5, 1], [5, 3], [5, 6], [6, 16], [6, 17], [6, 19], [6, 22], [7, 28]];
-var customTwo = [[0, 0], [0, 8], [0, 16], [0, 26], [1, 4], [1, 12], [1, 20], [1, 25], [1, 28], [1, 30], [2, 1], [2, 2], [2, 7], [2, 9], [2, 11], [2, 12], [2, 19], [2, 20], [2, 23], [2, 25], [2, 27], [2, 28], [2, 30], [3, 5], [3, 13], [3, 21], [3, 29], [5, 3], [5, 12], [5, 19], [6, 0], [6, 8], [6, 16], [6, 24], [7, 6], [7, 11], [7, 14], [7, 18], [7, 22], [7, 27]];
-var twinkleTwinkle = [[2, 8], [2, 10], [3, 4], [3, 6], [3, 12], [4, 16], [4, 18], [5, 20], [5, 22], [6, 24], [6, 26], [7, 0], [7, 2], [7, 28]];
-var maryLamb = [[3, 13], [3, 14], [5, 0], [5, 4], [5, 5], [5, 6], [5, 12], [5, 16], [5, 20], [5, 21], [5, 22], [5, 26], [6, 1], [6, 3], [6, 8], [6, 9], [6, 10], [6, 17], [6, 19], [6, 24], [6, 25], [6, 27], [7, 2], [7, 18], [7, 28]];
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a1", function() { return a1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a2", function() { return a2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a3", function() { return a3; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b1", function() { return b1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b2", function() { return b2; });
+var a1 = [[0, 0], [0, 6], [0, 12], [0, 16], [0, 22], [1, 8], [1, 24], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24], [3, 10], [3, 26], [4, 8], [4, 14], [4, 24], [4, 28], [5, 0], [5, 1], [5, 3], [5, 6], [6, 16], [6, 17], [6, 19], [6, 22], [7, 28]];
+var a2 = [[0, 0], [0, 8], [0, 16], [0, 26], [1, 4], [1, 12], [1, 20], [1, 25], [1, 28], [1, 30], [2, 1], [2, 2], [2, 7], [2, 9], [2, 11], [2, 12], [2, 19], [2, 20], [2, 23], [2, 25], [2, 27], [2, 28], [2, 30], [3, 5], [3, 13], [3, 21], [3, 29], [5, 3], [5, 12], [5, 19], [6, 0], [6, 8], [6, 16], [6, 24], [7, 6], [7, 11], [7, 14], [7, 18], [7, 22], [7, 27]];
+var a3 = [[0, 0], [0, 3], [0, 6], [0, 11], [0, 13], [0, 16], [0, 19], [0, 22], [0, 29], [1, 4], [1, 12], [1, 14], [1, 20], [1, 28], [1, 31], [4, 2], [4, 7], [4, 9], [4, 18], [4, 24], [4, 27], [4, 30], [5, 6], [5, 19], [6, 0], [6, 16], [7, 3], [7, 22]];
+var b1 = [[2, 8], [2, 10], [3, 4], [3, 6], [3, 12], [4, 16], [4, 18], [5, 20], [5, 22], [6, 24], [6, 26], [7, 0], [7, 2], [7, 28]];
+var b2 = [[3, 13], [3, 14], [5, 0], [5, 4], [5, 5], [5, 6], [5, 12], [5, 16], [5, 20], [5, 21], [5, 22], [5, 26], [6, 1], [6, 3], [6, 8], [6, 9], [6, 10], [6, 17], [6, 19], [6, 24], [6, 25], [6, 27], [7, 2], [7, 18], [7, 28]];
 
 /***/ })
 
