@@ -44478,24 +44478,25 @@ window.addEventListener('DOMContentLoaded', function () {
   })();
 
   var soundKitB = [];
-  var pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
+  var pitches = ['G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5'].reverse();
 
   (function generateSoundKitB() {
-    for (var i = 0; i < 8; i++) {
-      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Synth"](pitches[i]).toDestination();
+    for (var i = 0; i < 16; i++) {
+      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Synth"]().toDestination();
       soundKitB.push(sound);
     }
   })();
 
   var soundKitAButtonDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
-  var soundKitBButtonDescriptions = ['C5 - #8', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1'];
+  var soundKitBButtonDescriptions = ['G5 - #5', 'F5 - #4', 'E5 - #3', 'D5 - #2', 'C5 - #1', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1', 'B3 - #7', 'A3 - #6', 'G3 - #5'];
 
   (function generateSampleButtons() {
     var sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
 
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 15; i++) {
       var button = document.createElement('button');
       button.className = "samples-column-button";
+      if (i > 7) button.classList.add('hidden');
       var icon = document.createElement('i');
       icon.className = 'fas fa-music';
       var span = document.createElement('span');
@@ -44539,9 +44540,10 @@ window.addEventListener('DOMContentLoaded', function () {
   (function generateRows() {
     var sequencerRows = document.body.querySelector('.sequencer-rows');
 
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 15; i++) {
       var row = document.createElement('div');
       row.className = 'sequencer-row';
+      if (i > 7) row.classList.add('hidden');
 
       for (var j = 0; j < 32; j++) {
         var label = document.createElement('label');
@@ -44616,7 +44618,7 @@ window.addEventListener('DOMContentLoaded', function () {
       checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
       });
-    }, 200);
+    }, 150);
   }
 
   var bpmInput = document.body.querySelector('.bpm-input');
@@ -44647,6 +44649,11 @@ window.addEventListener('DOMContentLoaded', function () {
       soundKitAButton.classList.add('active');
       soundKitBButton.classList.remove('active');
       updateSampleButtonDescriptions(soundKitAButtonDescriptions);
+
+      for (var i = 8; i < 15; i++) {
+        sampleButtons[i].classList.add('hidden');
+        rows[i].classList.add('hidden');
+      }
     }
   }
 
@@ -44656,6 +44663,11 @@ window.addEventListener('DOMContentLoaded', function () {
       soundKitBButton.classList.add('active');
       soundKitAButton.classList.remove('active');
       updateSampleButtonDescriptions(soundKitBButtonDescriptions);
+
+      for (var i = 8; i < 15; i++) {
+        sampleButtons[i].classList.remove('hidden');
+        rows[i].classList.remove('hidden');
+      }
     }
   }
 
@@ -44708,12 +44720,24 @@ window.addEventListener('DOMContentLoaded', function () {
   presetB2.addEventListener('click', function () {
     return initializePreset('B', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b2"]);
   });
+  var presetB3 = document.body.querySelector('.preset-b3');
+  presetB3.addEventListener('click', function () {
+    return initializePreset('B', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b3"]);
+  });
+  var presetB4 = document.body.querySelector('.preset-b4');
+  presetB4.addEventListener('click', function () {
+    return initializePreset('B', 74, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
+  });
 
   function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
     clear();
     setTimeout(function () {
       correctSoundKit === 'A' ? enableSoundKitA() : enableSoundKitB();
+    }, 200);
+    setTimeout(function () {
       if (tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value !== correctBPM) updateBPM(correctBPM);
+    }, 250);
+    setTimeout(function () {
       correctCheckboxes.forEach(function (coords) {
         var currentBox = document.getElementsByClassName("row-".concat(coords[0], " col-").concat(coords[1]))[0];
         currentBox.checked = true;
@@ -44764,7 +44788,7 @@ window.addEventListener('DOMContentLoaded', function () {
 /*!************************!*\
   !*** ./src/presets.js ***!
   \************************/
-/*! exports provided: a1, a2, a3, b1, b2 */
+/*! exports provided: a1, a2, a3, b1, b2, b3, b4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44774,11 +44798,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a3", function() { return a3; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b1", function() { return b1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b2", function() { return b2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b3", function() { return b3; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b4", function() { return b4; });
 var a1 = [[0, 0], [0, 6], [0, 12], [0, 16], [0, 22], [1, 8], [1, 24], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24], [3, 10], [3, 26], [4, 8], [4, 14], [4, 24], [4, 28], [5, 0], [5, 1], [5, 3], [5, 6], [6, 16], [6, 17], [6, 19], [6, 22], [7, 28]];
 var a2 = [[0, 0], [0, 8], [0, 16], [0, 26], [1, 4], [1, 12], [1, 20], [1, 25], [1, 28], [1, 30], [2, 1], [2, 2], [2, 7], [2, 9], [2, 11], [2, 12], [2, 19], [2, 20], [2, 23], [2, 25], [2, 27], [2, 28], [2, 30], [3, 5], [3, 13], [3, 21], [3, 29], [5, 3], [5, 12], [5, 19], [6, 0], [6, 8], [6, 16], [6, 24], [7, 6], [7, 11], [7, 14], [7, 18], [7, 22], [7, 27]];
 var a3 = [[0, 0], [0, 3], [0, 6], [0, 11], [0, 13], [0, 16], [0, 19], [0, 22], [0, 29], [1, 4], [1, 12], [1, 14], [1, 20], [1, 28], [1, 31], [4, 2], [4, 7], [4, 9], [4, 18], [4, 24], [4, 27], [4, 30], [5, 6], [5, 19], [6, 0], [6, 16], [7, 3], [7, 22]];
 var b1 = [[2, 8], [2, 10], [3, 4], [3, 6], [3, 12], [4, 16], [4, 18], [5, 20], [5, 22], [6, 24], [6, 26], [7, 0], [7, 2], [7, 28]];
 var b2 = [[3, 13], [3, 14], [5, 0], [5, 4], [5, 5], [5, 6], [5, 12], [5, 16], [5, 20], [5, 21], [5, 22], [5, 26], [6, 1], [6, 3], [6, 8], [6, 9], [6, 10], [6, 17], [6, 19], [6, 24], [6, 25], [6, 27], [7, 2], [7, 18], [7, 28]];
+var b3 = [[8, 20], [9, 3], [9, 5], [9, 11], [9, 19], [9, 21], [10, 2], [10, 6], [10, 10], [10, 18], [10, 22], [11, 0], [11, 1], [11, 4], [11, 8], [11, 9], [11, 12], [11, 16], [11, 17], [11, 23], [11, 28], [11, 30], [12, 14], [12, 24], [12, 27], [13, 26], [14, 7], [14, 25]];
+var b4 = [[2, 11], [3, 12], [4, 15], [5, 2], [5, 6], [5, 10], [5, 14], [5, 16], [6, 1], [6, 5], [6, 9], [7, 17], [7, 25], [8, 0], [8, 4], [8, 8], [9, 18], [9, 24], [9, 26], [10, 23]];
 
 /***/ })
 

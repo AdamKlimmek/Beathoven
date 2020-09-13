@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import { a1, a2, a3, b1, b2 } from './presets.js';
+import { a1, a2, a3, b1, b2, b3, b4 } from './presets.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -14,21 +14,22 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
 
     const soundKitB = [];
-    const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
+    const pitches = ['G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5'].reverse();
     (function generateSoundKitB() {
-        for (let i = 0; i < 8; i++) {
-            let sound = new Tone.Synth(pitches[i]).toDestination();
+        for (let i = 0; i < 16; i++) {
+            let sound = new Tone.Synth().toDestination();
             soundKitB.push(sound);
         }
     })();
 
     const soundKitAButtonDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
-    const soundKitBButtonDescriptions = ['C5 - #8', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1'];
+    const soundKitBButtonDescriptions = ['G5 - #5', 'F5 - #4', 'E5 - #3', 'D5 - #2', 'C5 - #1', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1', 'B3 - #7', 'A3 - #6', 'G3 - #5'];
     (function generateSampleButtons() {
         let sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 15; i++) {
             let button = document.createElement('button');
             button.className = `samples-column-button`;
+            if (i > 7) button.classList.add('hidden');
 
             let icon = document.createElement('i');
             icon.className = 'fas fa-music';
@@ -77,9 +78,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     (function generateRows() {
         let sequencerRows = document.body.querySelector('.sequencer-rows');
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 15; i++) {
             let row = document.createElement('div');
             row.className = 'sequencer-row';
+            if (i > 7) row.classList.add('hidden');
+            
 
             for (let j = 0; j < 32; j++) {
                 let label = document.createElement('label');
@@ -148,7 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             checkboxes.forEach(checkbox => { checkbox.checked = false; })
-        }, 200);
+        }, 150);
     }
 
     const bpmInput = document.body.querySelector('.bpm-input');
@@ -177,6 +180,11 @@ window.addEventListener('DOMContentLoaded', () => {
             soundKitAButton.classList.add('active');
             soundKitBButton.classList.remove('active');
             updateSampleButtonDescriptions(soundKitAButtonDescriptions);
+
+            for (let i = 8; i < 15; i++) {
+                sampleButtons[i].classList.add('hidden');
+                rows[i].classList.add('hidden');
+            }
         }
     }
 
@@ -186,6 +194,11 @@ window.addEventListener('DOMContentLoaded', () => {
             soundKitBButton.classList.add('active');
             soundKitAButton.classList.remove('active');
             updateSampleButtonDescriptions(soundKitBButtonDescriptions);
+
+            for (let i = 8; i < 15; i++) {
+                sampleButtons[i].classList.remove('hidden');
+                rows[i].classList.remove('hidden');
+            }
         }
     }
 
@@ -231,14 +244,24 @@ window.addEventListener('DOMContentLoaded', () => {
     const presetB2 = document.body.querySelector('.preset-b2');
     presetB2.addEventListener('click', () => initializePreset('B', 60, b2));
 
+    const presetB3 = document.body.querySelector('.preset-b3');
+    presetB3.addEventListener('click', () => initializePreset('B', 60, b3));
+
+    const presetB4 = document.body.querySelector('.preset-b4');
+    presetB4.addEventListener('click', () => initializePreset('B', 74, b4));
+
     function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
         clear();
 
         setTimeout(() => {
             (correctSoundKit === 'A') ? enableSoundKitA() : enableSoundKitB();
+        }, 200);
             
+        setTimeout(() => {
             if (Tone.Transport.bpm.value !== correctBPM) updateBPM(correctBPM);
-    
+        }, 250);
+
+        setTimeout(() => {
             correctCheckboxes.forEach((coords) => {
                 let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
                 currentBox.checked = true;

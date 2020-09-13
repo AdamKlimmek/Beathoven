@@ -1,7 +1,8 @@
 .body {
-    height: 100vh;
     min-width: 1200px;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     background-color: rgb(30, 30, 30);
     font-family: 'Raleway', sans-serif;
     -webkit-user-select: none; /* Safari */        
@@ -11,14 +12,11 @@
 }
 
 .header {
-    position: absolute;
     width: 100%;
-    min-width: 1200px;
     display: flex;
     justify-content: space-between;
     background: rgb(20, 20, 20);
     color: white;
-    font-size: 30px;
     box-shadow: 0 1px 10px hsl(0, 4%, 18%);
 }
 
@@ -28,37 +26,42 @@
     align-items: center;
     margin-left: 5%;
     font-family: 'Tangerine', cursive;
-    font-size: 45px;
+    font-size: 36px;
     font-weight: 700;
 }
 
 .header img {
-    height: 82px;
-    width: 82px;
-    margin: 8px 5px 8px 0;
+    height: 43px;
+    width: 43px;
+    margin: 4px 7px 5px 0;
 }
 
 .title-part-one {
     color: rgb(0, 255, 229);
+    margin-top: 1.5px;
 }
 
 .title-spacer {
     width: 1px;
-    height: 55px;
+    height: 35px;
     background: white;
-    margin: 7px;
+    margin: 0 7px;
+}
+
+.title-part-two {
+    margin-top: 1.5px;
 }
 
 .header-navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 35px;
+    font-size: 25px;
     margin-right: 5%;
 }
 
 .header-navbar-link {
-    margin: 12px;
+    margin: 0 10px;
     display: inline-block;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
@@ -261,74 +264,74 @@ label:nth-of-type(4n - 3):hover .sequencer-row-pad {
     background: rgb(80, 80, 80);
 }
 
-.row-0:checked + .sequencer-row-pad {
+.row-0:checked + .sequencer-row-pad, .row-8:checked + .sequencer-row-pad {
     background: rgb(255, 0, 0);
 }
 
-.row-0:checked + .sequencer-row-pad:hover {
+.row-0:checked + .sequencer-row-pad:hover, .row-8:checked + .sequencer-row-pad:hover {
     background: rgb(255, 0, 0);
     filter: brightness(85%);
 }
 
-.row-1:checked + .sequencer-row-pad {
+.row-1:checked + .sequencer-row-pad, .row-9:checked + .sequencer-row-pad {
     background: rgb(255, 111, 0);
 }
 
-.row-1:checked + .sequencer-row-pad:hover {
+.row-1:checked + .sequencer-row-pad:hover, .row-9:checked + .sequencer-row-pad:hover {
     background: rgb(255, 111, 0);
     filter: brightness(85%);
 }
 
-.row-2:checked + .sequencer-row-pad {
+.row-2:checked + .sequencer-row-pad, .row-10:checked + .sequencer-row-pad {
     background: rgb(254, 212, 2);
 }
 
-.row-2:checked + .sequencer-row-pad:hover {
+.row-2:checked + .sequencer-row-pad:hover, .row-10:checked + .sequencer-row-pad:hover {
     background: rgb(254, 212, 2);
     filter: brightness(85%);
 }
 
-.row-3:checked + .sequencer-row-pad {
+.row-3:checked + .sequencer-row-pad, .row-11:checked + .sequencer-row-pad {
     background: rgb(10, 193, 0);
 }
 
-.row-3:checked + .sequencer-row-pad:hover {
+.row-3:checked + .sequencer-row-pad:hover, .row-11:checked + .sequencer-row-pad:hover {
     background: rgb(10, 193, 0);
     filter: brightness(85%);
 }
 
-.row-4:checked + .sequencer-row-pad {
+.row-4:checked + .sequencer-row-pad, .row-12:checked + .sequencer-row-pad{
     background: rgb(0, 255, 229);
 }
 
-.row-4:checked + .sequencer-row-pad:hover {
+.row-4:checked + .sequencer-row-pad:hover, .row-12:checked + .sequencer-row-pad:hover {
     background: rgb(0, 255, 229);
     filter: brightness(85%);
 }
 
-.row-5:checked + .sequencer-row-pad {
+.row-5:checked + .sequencer-row-pad, .row-13:checked + .sequencer-row-pad {
     background: rgb(35, 35, 255);
 }
 
-.row-5:checked + .sequencer-row-pad:hover {
+.row-5:checked + .sequencer-row-pad:hover, .row-13:checked + .sequencer-row-pad:hover {
     background: rgb(35, 35, 255);
     filter: brightness(85%);
 }
 
-.row-6:checked + .sequencer-row-pad {
+.row-6:checked + .sequencer-row-pad, .row-14:checked + .sequencer-row-pad {
     background: rgb(149, 0, 255);
 }
 
-.row-6:checked + .sequencer-row-pad:hover {
+.row-6:checked + .sequencer-row-pad:hover, .row-14:checked + .sequencer-row-pad:hover {
     background: rgb(149, 0, 255);
     filter: brightness(85%);
 }
 
-.row-7:checked + .sequencer-row-pad {
+.row-7:checked + .sequencer-row-pad, .row-15:checked + .sequencer-row-pad {
     background: rgb(255, 0, 238);
 }
 
-.row-7:checked + .sequencer-row-pad:hover {
+.row-7:checked + .sequencer-row-pad:hover, .row-15:checked + .sequencer-row-pad:hover {
     background: rgb(255, 0, 238);
     filter: brightness(85%);
 }
