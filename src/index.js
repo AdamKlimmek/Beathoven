@@ -1,18 +1,30 @@
 import * as Tone from 'tone';
+import { customOne, customTwo, twinkleTwinkle, maryLamb } from './presets.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    function generateSequencer() {
-        generateSequencerSampleButtons();
-        generateSequencerRows();
-        generateSequencerBeatCountDisplay();
-        generateSoundKitOne();
-        generateSoundKitTwo();
-        generateSampleButtonEventListeners();
-    }
+    // Initial Setup
 
-    function generateSequencerSampleButtons() {
-        let sampleDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
+    const soundKitA = [];
+    (function generateSoundKitA() {
+        for (let i = 1; i <= 8; i++) {
+            let sound = new Tone.Player(`./dist/sample_0${i}.wav`).toDestination();
+            soundKitA.push(sound);
+        }
+    })();
+
+    const soundKitB = [];
+    const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
+    (function generateSoundKitB() {
+        for (let i = 0; i < 8; i++) {
+            let sound = new Tone.Synth(pitches[i]).toDestination();
+            soundKitB.push(sound);
+        }
+    })();
+
+    const soundKitAButtonDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
+    const soundKitBButtonDescriptions = ['C5 - #8', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1'];
+    (function generateSampleButtons() {
         let sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
         for (let i = 0; i < 8; i++) {
             let button = document.createElement('button');
@@ -22,12 +34,30 @@ window.addEventListener('DOMContentLoaded', () => {
             icon.className = 'fas fa-music';
 
             let span = document.createElement('span');
-            span.innerHTML = sampleDescriptions[i];
+            span.innerHTML = soundKitAButtonDescriptions[i];
 
             button.appendChild(icon);
             button.appendChild(span);
             sequencerSamplesColumn.appendChild(button)
         }
+    })();
+
+    const sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
+    let currentSoundKit = 'A';
+    (function generateSampleButtonEventListeners() {
+        sampleButtons.forEach((button, i) => {
+            button.addEventListener('click', () => {
+                if (currentSoundKit === 'A') {
+                    soundKitA[i].start();
+                } else {
+                    soundKitB[i].triggerAttackRelease(pitches[i], '16n');
+                }
+            })
+        })
+    })();
+
+    (function generateToggleSoundKitButtons() {
+        let sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
 
         let div = document.createElement('div');
         div.className = 'toggle-sound-kit';
@@ -37,15 +67,15 @@ window.addEventListener('DOMContentLoaded', () => {
         buttonOne.innerHTML = 'A';
 
         let buttonTwo = document.createElement('button');
-        buttonTwo.innerHTML = 'B';
         buttonTwo.className = 'sound-kit-b-toggle';
+        buttonTwo.innerHTML = 'B';
 
         div.appendChild(buttonOne);
         div.appendChild(buttonTwo);
         sequencerSamplesColumn.appendChild(div)
-    }
+    })();
 
-    function generateSequencerRows() {
+    (function generateRows() {
         let sequencerRows = document.body.querySelector('.sequencer-rows');
         for (let i = 0; i < 8; i++) {
             let row = document.createElement('div');
@@ -68,153 +98,154 @@ window.addEventListener('DOMContentLoaded', () => {
 
             sequencerRows.appendChild(row)
         }
-    }
-
-    function generateSequencerBeatCountDisplay() {
-        let sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
-        for (let i = 1; i <= 32; i++) {
-            let div = document.createElement('div');
-            div.innerHTML = `${i}`;
-            div.className = 'beat-count-number';
-            sequencerBeatCountDisplay.appendChild(div)
-        }
-    }
-
-    const soundKitA = [];
-    function generateSoundKitOne() {
-        for (let i = 1; i <= 8; i++) {
-            let sound = new Tone.Player(`./dist/sample_0${i}.wav`).toDestination();
-            soundKitA.push(sound);
-        }
-    }
-
-    const soundKitB = [];
-    const pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
-    function generateSoundKitTwo() {
-        for (let i = 0; i < 8; i++) {
-            let sound = new Tone.Synth().toDestination();
-            soundKitB.push(sound);
-        }
-    }
-
-    let currentSoundKit = 'A';
-    function generateSampleButtonEventListeners() {
-        let sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
-        sampleButtons.forEach((button, i) => {
-            button.addEventListener('click', () => {
-                if (currentSoundKit === 'A') {
-                    soundKitA[i].start();
-                } else {
-                    soundKitB[i].triggerAttackRelease(pitches[i], '16n');
-                }
-            })
-        })
-    }
-
-    generateSequencer()
-
-
-
-    // reorganize / refactor 
+    })();
 
     const rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
     const checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
-    let columnCounter = 0
-    
+    let columnCounter = 0;
 
+    (function generateBeatCounterDisplay() {
+        let sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
+        for (let i = 1; i <= 32; i++) {
+            let div = document.createElement('div');
+            div.className = 'beat-count-number';
+            div.innerHTML = `${i}`;
+            sequencerBeatCountDisplay.appendChild(div)
+        }
+    })();
+
+    // Buttons & Button Logic
 
     const playButton = document.body.querySelector('.fa-play-circle');
+    playButton.addEventListener('click', () => play());
+    
     const stopButton = document.body.querySelector('.fa-stop-circle');
-    const togglePlayback = document.body.querySelector('.toggle-playback');
-    togglePlayback.addEventListener('click', () => { togglePlay() });
-    function togglePlay() {
-        if (stopButton.classList.contains('hidden')) {
-            Tone.Transport.start();
-            playButton.classList.add('hidden');
-            stopButton.classList.remove('hidden');
+    stopButton.addEventListener('click', () => stop());
+
+    function play() {
+        Tone.Transport.start();
+        playButton.classList.add('hidden');
+        stopButton.classList.remove('hidden');
+    }
+
+    function stop() {
+        Tone.Transport.stop();
+        playButton.classList.remove('hidden');
+        stopButton.classList.add('hidden');
+        setTimeout(() => {
+            columnCounter = 0;
+            checkboxes.forEach(checkbox => { checkbox.classList.remove('active') })
+        }, 100);
+    }
+
+    const clearButton = document.body.querySelector('.clear-button');
+    clearButton.addEventListener('click', () => clear());
+        
+    function clear() {
+        if (playButton.classList.contains('hidden')) {
+            stop();
+        }
+
+        setTimeout(() => {
+            checkboxes.forEach(checkbox => { checkbox.checked = false; })
+        }, 200);
+    }
+
+    const bpmInput = document.body.querySelector('.bpm-input');
+    const bpmOutput = document.body.querySelector('.form-output');
+
+    bpmInput.addEventListener('change', (e) => {
+        e.preventDefault();
+        updateBPM(e.currentTarget.value);
+    })
+
+    function updateBPM(val) {
+        bpmInput.value = val;
+        bpmOutput.innerHTML = val;
+        Tone.Transport.bpm.value = val;
+    }
+
+    const soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
+    soundKitAButton.addEventListener('click', () => enableSoundKitA());
+
+    const soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
+    soundKitBButton.addEventListener('click', () => enableSoundKitB());
+
+    function enableSoundKitA() {
+        if (!soundKitAButton.classList.contains('active')) {
+            currentSoundKit = 'A';
+            soundKitAButton.classList.add('active');
+            soundKitBButton.classList.remove('active');
+            updateSampleButtonDescriptions(soundKitAButtonDescriptions);
+        }
+    }
+
+    function enableSoundKitB() {
+        if (!soundKitBButton.classList.contains('active')) {
+            currentSoundKit = 'B';
+            soundKitBButton.classList.add('active');
+            soundKitAButton.classList.remove('active');
+            updateSampleButtonDescriptions(soundKitBButtonDescriptions);
+        }
+    }
+
+    function updateSampleButtonDescriptions(descriptions) {
+        sampleButtons.forEach((button, i) => {
+            button.children[1].innerHTML = descriptions[i];
+        })
+    }
+
+    const presetsDropdownButton = document.body.querySelector('.fa-caret-square-down');
+    const dropdownMenu = document.body.querySelector('.dropdown-menu');
+    let dropdownOpen = false;
+    presetsDropdownButton.addEventListener('click', () => toggleDropdown());
+    
+    function toggleDropdown() {
+        dropdownOpen = !dropdownOpen;
+        if (dropdownOpen) {
+            dropdownMenu.classList.remove('hidden');
         } else {
-            Tone.Transport.stop();
-            playButton.classList.remove('hidden');
-            stopButton.classList.add('hidden');
-            setTimeout(() => {
-                columnCounter = 0;
-                checkboxes.forEach(checkbox => { checkbox.classList.remove('active') })
-            }, 100);
+            dropdownMenu.classList.add('hidden')
         }
     }
     
-
-
-    const bpmInput = document.body.querySelector('.bpm-input');
-    bpmInput.addEventListener('change', (e) => {
-        e.preventDefault();
-        Tone.Transport.bpm.value = e.currentTarget.value;
+    const body = document.body.querySelector('.body');
+    body.addEventListener('click', (e) => {
+        if (dropdownOpen && !presetsDropdownButton.contains(e.target)) {
+           toggleDropdown();
+        }
     })
 
+    const presetOneButton = document.body.querySelector('.preset-one');
+    presetOneButton.addEventListener('click', () => initializePreset('A', 120, customOne));
+    
+    const presetTwoButton = document.body.querySelector('.preset-two');
+    presetTwoButton.addEventListener('click', () => initializePreset('A', 60, customTwo));
 
+    const presetThreeButton = document.body.querySelector('.preset-three');
+    presetThreeButton.addEventListener('click', () => initializePreset('B', 70, twinkleTwinkle));
 
-    const clearButton = document.body.querySelector('.clear-button');
-    clearButton.addEventListener('click', () => {
-        Tone.Transport.stop();
+    const presetFourButton = document.body.querySelector('.preset-four');
+    presetFourButton.addEventListener('click', () => initializePreset('B', 60, maryLamb));
+
+    function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
+        clear();
+
         setTimeout(() => {
-            columnCounter = 0;
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-                checkbox.classList.remove('active');
+            (correctSoundKit === 'A') ? enableSoundKitA() : enableSoundKitB();
+            
+            if (Tone.Transport.bpm.value !== correctBPM) updateBPM(correctBPM);
+    
+            correctCheckboxes.forEach((coords) => {
+                let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
+                currentBox.checked = true;
             })
-            if (playButton.classList.contains('hidden')) togglePlay();
-        }, 100);
-    })
+    
+            play();
+        }, 300);
+    }
 
-
-
-    const exampleBeatButton = document.body.querySelector('.example-beat-button');
-    exampleBeatButton.addEventListener('click', () => {
-        checkboxes.forEach(checkbox => { checkbox.checked = false })
-        
-        const boxesToCheck = [
-            [0, 0], [0, 6], [0, 12], [0, 16], [0, 22],
-            [1, 8], [1, 24],
-            [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24],
-            [3, 10], [3, 26],
-            [4, 8], [4, 14], [4, 24], [4, 28],
-            [5, 0], [5, 1], [5, 3], [5, 6],
-            [6, 16], [6, 17], [6, 19], [6, 22],
-            [7, 28]
-        ];
-
-        boxesToCheck.forEach((arr) => {
-            let currentBox = document.getElementsByClassName(`row-${arr[0]} col-${arr[1]}`)[0];
-            currentBox.checked = true;
-        })
-
-        bpmInput.value = 120;
-        let bpmOutput = document.body.querySelector('.form-output');
-        bpmOutput.innerHTML = 120;
-        Tone.Transport.bpm.value = 120;
-    })
-
-    const soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
-    const soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
-    soundKitAButton.addEventListener('click', () => {
-        if (!soundKitAButton.classList.contains('active')) {
-            soundKitAButton.classList.add('active');
-            soundKitBButton.classList.remove('active');
-            currentSoundKit = 'A';
-        }
-    })
-
-    soundKitBButton.addEventListener('click', () => {
-        if (!soundKitBButton.classList.contains('active')) {
-            soundKitBButton.classList.add('active');
-            soundKitAButton.classList.remove('active');
-            currentSoundKit = 'B';
-        }
-    })
-  
-    // end reorganize / refactor 
-
-
+    // Looping Function
 
     Tone.Transport.scheduleRepeat(runSequence, '16n')
 

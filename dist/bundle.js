@@ -44463,19 +44463,34 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
+/* harmony import */ var _presets_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./presets.js */ "./src/presets.js");
+
 
 window.addEventListener('DOMContentLoaded', function () {
-  function generateSequencer() {
-    generateSequencerSampleButtons();
-    generateSequencerRows();
-    generateSequencerBeatCountDisplay();
-    generateSoundKitOne();
-    generateSoundKitTwo();
-    generateSampleButtonEventListeners();
-  }
+  // Initial Setup
+  var soundKitA = [];
 
-  function generateSequencerSampleButtons() {
-    var sampleDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
+  (function generateSoundKitA() {
+    for (var i = 1; i <= 8; i++) {
+      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"]("./dist/sample_0".concat(i, ".wav")).toDestination();
+      soundKitA.push(sound);
+    }
+  })();
+
+  var soundKitB = [];
+  var pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
+
+  (function generateSoundKitB() {
+    for (var i = 0; i < 8; i++) {
+      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Synth"](pitches[i]).toDestination();
+      soundKitB.push(sound);
+    }
+  })();
+
+  var soundKitAButtonDescriptions = ['Kick', 'Snare', 'Tom', 'Hat', 'Snap', 'Keys 1', 'Keys 2', 'Keys 3'];
+  var soundKitBButtonDescriptions = ['C5 - #8', 'B4 - #7', 'A4 - #6', 'G4 - #5', 'F4 - #4', 'E4 - #3', 'D4 - #2', 'C4 - #1'];
+
+  (function generateSampleButtons() {
     var sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
 
     for (var i = 0; i < 8; i++) {
@@ -44484,26 +44499,44 @@ window.addEventListener('DOMContentLoaded', function () {
       var icon = document.createElement('i');
       icon.className = 'fas fa-music';
       var span = document.createElement('span');
-      span.innerHTML = sampleDescriptions[i];
+      span.innerHTML = soundKitAButtonDescriptions[i];
       button.appendChild(icon);
       button.appendChild(span);
       sequencerSamplesColumn.appendChild(button);
     }
+  })();
 
+  var sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
+  var currentSoundKit = 'A';
+
+  (function generateSampleButtonEventListeners() {
+    sampleButtons.forEach(function (button, i) {
+      button.addEventListener('click', function () {
+        if (currentSoundKit === 'A') {
+          soundKitA[i].start();
+        } else {
+          soundKitB[i].triggerAttackRelease(pitches[i], '16n');
+        }
+      });
+    });
+  })();
+
+  (function generateToggleSoundKitButtons() {
+    var sequencerSamplesColumn = document.body.querySelector('.sequencer-samples-column');
     var div = document.createElement('div');
     div.className = 'toggle-sound-kit';
     var buttonOne = document.createElement('button');
     buttonOne.className = 'sound-kit-a-toggle active';
     buttonOne.innerHTML = 'A';
     var buttonTwo = document.createElement('button');
-    buttonTwo.innerHTML = 'B';
     buttonTwo.className = 'sound-kit-b-toggle';
+    buttonTwo.innerHTML = 'B';
     div.appendChild(buttonOne);
     div.appendChild(buttonTwo);
     sequencerSamplesColumn.appendChild(div);
-  }
+  })();
 
-  function generateSequencerRows() {
+  (function generateRows() {
     var sequencerRows = document.body.querySelector('.sequencer-rows');
 
     for (var i = 0; i < 8; i++) {
@@ -44524,131 +44557,167 @@ window.addEventListener('DOMContentLoaded', function () {
 
       sequencerRows.appendChild(row);
     }
-  }
-
-  function generateSequencerBeatCountDisplay() {
-    var sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
-
-    for (var i = 1; i <= 32; i++) {
-      var div = document.createElement('div');
-      div.innerHTML = "".concat(i);
-      div.className = 'beat-count-number';
-      sequencerBeatCountDisplay.appendChild(div);
-    }
-  }
-
-  var soundKitA = [];
-
-  function generateSoundKitOne() {
-    for (var i = 1; i <= 8; i++) {
-      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Player"]("./dist/sample_0".concat(i, ".wav")).toDestination();
-      soundKitA.push(sound);
-    }
-  }
-
-  var soundKitB = [];
-  var pitches = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'].reverse();
-
-  function generateSoundKitTwo() {
-    for (var i = 0; i < 8; i++) {
-      var sound = new tone__WEBPACK_IMPORTED_MODULE_0__["Synth"]().toDestination();
-      soundKitB.push(sound);
-    }
-  }
-
-  var currentSoundKit = 'A';
-
-  function generateSampleButtonEventListeners() {
-    var sampleButtons = Array.from(document.body.querySelectorAll('.samples-column-button'));
-    sampleButtons.forEach(function (button, i) {
-      button.addEventListener('click', function () {
-        if (currentSoundKit === 'A') {
-          soundKitA[i].start();
-        } else {
-          soundKitB[i].triggerAttackRelease(pitches[i], '16n');
-        }
-      });
-    });
-  }
-
-  generateSequencer(); // reorganize / refactor 
+  })();
 
   var rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
   var checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
   var columnCounter = 0;
+
+  (function generateBeatCounterDisplay() {
+    var sequencerBeatCountDisplay = document.body.querySelector('.sequencer-beat-count-display');
+
+    for (var i = 1; i <= 32; i++) {
+      var div = document.createElement('div');
+      div.className = 'beat-count-number';
+      div.innerHTML = "".concat(i);
+      sequencerBeatCountDisplay.appendChild(div);
+    }
+  })(); // Buttons & Button Logic
+
+
   var playButton = document.body.querySelector('.fa-play-circle');
+  playButton.addEventListener('click', function () {
+    return play();
+  });
   var stopButton = document.body.querySelector('.fa-stop-circle');
-  var togglePlayback = document.body.querySelector('.toggle-playback');
-  togglePlayback.addEventListener('click', function () {
-    togglePlay();
+  stopButton.addEventListener('click', function () {
+    return stop();
   });
 
-  function togglePlay() {
-    if (stopButton.classList.contains('hidden')) {
-      tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].start();
-      playButton.classList.add('hidden');
-      stopButton.classList.remove('hidden');
-    } else {
-      tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].stop();
-      playButton.classList.remove('hidden');
-      stopButton.classList.add('hidden');
-      setTimeout(function () {
-        columnCounter = 0;
-        checkboxes.forEach(function (checkbox) {
-          checkbox.classList.remove('active');
-        });
-      }, 100);
-    }
+  function play() {
+    tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].start();
+    playButton.classList.add('hidden');
+    stopButton.classList.remove('hidden');
   }
 
-  var bpmInput = document.body.querySelector('.bpm-input');
-  bpmInput.addEventListener('change', function (e) {
-    e.preventDefault();
-    tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value = e.currentTarget.value;
-  });
-  var clearButton = document.body.querySelector('.clear-button');
-  clearButton.addEventListener('click', function () {
+  function stop() {
     tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].stop();
+    playButton.classList.remove('hidden');
+    stopButton.classList.add('hidden');
     setTimeout(function () {
       columnCounter = 0;
       checkboxes.forEach(function (checkbox) {
-        checkbox.checked = false;
         checkbox.classList.remove('active');
       });
-      if (playButton.classList.contains('hidden')) togglePlay();
     }, 100);
+  }
+
+  var clearButton = document.body.querySelector('.clear-button');
+  clearButton.addEventListener('click', function () {
+    return clear();
   });
-  var exampleBeatButton = document.body.querySelector('.example-beat-button');
-  exampleBeatButton.addEventListener('click', function () {
-    checkboxes.forEach(function (checkbox) {
-      checkbox.checked = false;
-    });
-    var boxesToCheck = [[0, 0], [0, 6], [0, 12], [0, 16], [0, 22], [1, 8], [1, 24], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24], [3, 10], [3, 26], [4, 8], [4, 14], [4, 24], [4, 28], [5, 0], [5, 1], [5, 3], [5, 6], [6, 16], [6, 17], [6, 19], [6, 22], [7, 28]];
-    boxesToCheck.forEach(function (arr) {
-      var currentBox = document.getElementsByClassName("row-".concat(arr[0], " col-").concat(arr[1]))[0];
-      currentBox.checked = true;
-    });
-    bpmInput.value = 120;
-    var bpmOutput = document.body.querySelector('.form-output');
-    bpmOutput.innerHTML = 120;
-    tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value = 120;
+
+  function clear() {
+    if (playButton.classList.contains('hidden')) {
+      stop();
+    }
+
+    setTimeout(function () {
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+      });
+    }, 200);
+  }
+
+  var bpmInput = document.body.querySelector('.bpm-input');
+  var bpmOutput = document.body.querySelector('.form-output');
+  bpmInput.addEventListener('change', function (e) {
+    e.preventDefault();
+    updateBPM(e.currentTarget.value);
   });
+
+  function updateBPM(val) {
+    bpmInput.value = val;
+    bpmOutput.innerHTML = val;
+    tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value = val;
+  }
+
   var soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
-  var soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
   soundKitAButton.addEventListener('click', function () {
+    return enableSoundKitA();
+  });
+  var soundKitBButton = document.body.querySelector('.sound-kit-b-toggle');
+  soundKitBButton.addEventListener('click', function () {
+    return enableSoundKitB();
+  });
+
+  function enableSoundKitA() {
     if (!soundKitAButton.classList.contains('active')) {
+      currentSoundKit = 'A';
       soundKitAButton.classList.add('active');
       soundKitBButton.classList.remove('active');
-      currentSoundKit = 'A';
+      updateSampleButtonDescriptions(soundKitAButtonDescriptions);
     }
-  });
-  soundKitBButton.addEventListener('click', function () {
+  }
+
+  function enableSoundKitB() {
     if (!soundKitBButton.classList.contains('active')) {
+      currentSoundKit = 'B';
       soundKitBButton.classList.add('active');
       soundKitAButton.classList.remove('active');
-      currentSoundKit = 'B';
+      updateSampleButtonDescriptions(soundKitBButtonDescriptions);
     }
-  }); // end reorganize / refactor 
+  }
+
+  function updateSampleButtonDescriptions(descriptions) {
+    sampleButtons.forEach(function (button, i) {
+      button.children[1].innerHTML = descriptions[i];
+    });
+  }
+
+  var presetsDropdownButton = document.body.querySelector('.fa-caret-square-down');
+  var dropdownMenu = document.body.querySelector('.dropdown-menu');
+  var dropdownOpen = false;
+  presetsDropdownButton.addEventListener('click', function () {
+    return toggleDropdown();
+  });
+
+  function toggleDropdown() {
+    dropdownOpen = !dropdownOpen;
+
+    if (dropdownOpen) {
+      dropdownMenu.classList.remove('hidden');
+    } else {
+      dropdownMenu.classList.add('hidden');
+    }
+  }
+
+  var body = document.body.querySelector('.body');
+  body.addEventListener('click', function (e) {
+    if (dropdownOpen && !presetsDropdownButton.contains(e.target)) {
+      toggleDropdown();
+    }
+  });
+  var presetOneButton = document.body.querySelector('.preset-one');
+  presetOneButton.addEventListener('click', function () {
+    return initializePreset('A', 120, _presets_js__WEBPACK_IMPORTED_MODULE_1__["customOne"]);
+  });
+  var presetTwoButton = document.body.querySelector('.preset-two');
+  presetTwoButton.addEventListener('click', function () {
+    return initializePreset('A', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["customTwo"]);
+  });
+  var presetThreeButton = document.body.querySelector('.preset-three');
+  presetThreeButton.addEventListener('click', function () {
+    return initializePreset('B', 70, _presets_js__WEBPACK_IMPORTED_MODULE_1__["twinkleTwinkle"]);
+  });
+  var presetFourButton = document.body.querySelector('.preset-four');
+  presetFourButton.addEventListener('click', function () {
+    return initializePreset('B', 60, _presets_js__WEBPACK_IMPORTED_MODULE_1__["maryLamb"]);
+  });
+
+  function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
+    clear();
+    setTimeout(function () {
+      correctSoundKit === 'A' ? enableSoundKitA() : enableSoundKitB();
+      if (tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value !== correctBPM) updateBPM(correctBPM);
+      correctCheckboxes.forEach(function (coords) {
+        var currentBox = document.getElementsByClassName("row-".concat(coords[0], " col-").concat(coords[1]))[0];
+        currentBox.checked = true;
+      });
+      play();
+    }, 300);
+  } // Looping Function
+
 
   tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].scheduleRepeat(runSequence, '16n');
 
@@ -44684,6 +44753,26 @@ window.addEventListener('DOMContentLoaded', function () {
     columnCounter++;
   }
 });
+
+/***/ }),
+
+/***/ "./src/presets.js":
+/*!************************!*\
+  !*** ./src/presets.js ***!
+  \************************/
+/*! exports provided: customOne, customTwo, twinkleTwinkle, maryLamb */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customOne", function() { return customOne; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customTwo", function() { return customTwo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "twinkleTwinkle", function() { return twinkleTwinkle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maryLamb", function() { return maryLamb; });
+var customOne = [[0, 0], [0, 6], [0, 12], [0, 16], [0, 22], [1, 8], [1, 24], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 14], [2, 16], [2, 18], [2, 19], [2, 20], [2, 22], [2, 24], [3, 10], [3, 26], [4, 8], [4, 14], [4, 24], [4, 28], [5, 0], [5, 1], [5, 3], [5, 6], [6, 16], [6, 17], [6, 19], [6, 22], [7, 28]];
+var customTwo = [[0, 0], [0, 8], [0, 16], [0, 26], [1, 4], [1, 12], [1, 20], [1, 25], [1, 28], [1, 30], [2, 1], [2, 2], [2, 7], [2, 9], [2, 11], [2, 12], [2, 19], [2, 20], [2, 23], [2, 25], [2, 27], [2, 28], [2, 30], [3, 5], [3, 13], [3, 21], [3, 29], [5, 3], [5, 12], [5, 19], [6, 0], [6, 8], [6, 16], [6, 24], [7, 6], [7, 11], [7, 14], [7, 18], [7, 22], [7, 27]];
+var twinkleTwinkle = [[2, 8], [2, 10], [3, 4], [3, 6], [3, 12], [4, 16], [4, 18], [5, 20], [5, 22], [6, 24], [6, 26], [7, 0], [7, 2], [7, 28]];
+var maryLamb = [[3, 13], [3, 14], [5, 0], [5, 4], [5, 5], [5, 6], [5, 12], [5, 16], [5, 20], [5, 21], [5, 22], [5, 26], [6, 1], [6, 3], [6, 8], [6, 9], [6, 10], [6, 17], [6, 19], [6, 24], [6, 25], [6, 27], [7, 2], [7, 18], [7, 28]];
 
 /***/ })
 
