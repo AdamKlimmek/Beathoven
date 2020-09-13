@@ -284,8 +284,10 @@ window.addEventListener('DOMContentLoaded', () => {
             let currentCheckBox = currentPad.querySelector('input')
             
             if (currentSoundKit === 'A') {
-                let currentSound = soundKitA[row];
-                if (currentCheckBox.checked) currentSound.start(time);
+                if (row < 8) {
+                    let currentSound = soundKitA[row];
+                    if (currentCheckBox.checked) currentSound.start(time);
+                }
             } else {
                 let currentSynth = soundKitB[row];
                 let currentPitch = pitches[row]

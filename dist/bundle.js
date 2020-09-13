@@ -44758,8 +44758,10 @@ window.addEventListener('DOMContentLoaded', function () {
       var currentCheckBox = currentPad.querySelector('input');
 
       if (currentSoundKit === 'A') {
-        var currentSound = soundKitA[row];
-        if (currentCheckBox.checked) currentSound.start(time);
+        if (row < 8) {
+          var currentSound = soundKitA[row];
+          if (currentCheckBox.checked) currentSound.start(time);
+        }
       } else {
         var currentSynth = soundKitB[row];
         var currentPitch = pitches[row];
