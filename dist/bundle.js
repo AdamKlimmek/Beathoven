@@ -44726,7 +44726,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   var presetB4 = document.body.querySelector('.preset-b4');
   presetB4.addEventListener('click', function () {
-    return initializePreset('B', 74, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
+    return initializePreset('B', 68, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
   });
 
   function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {

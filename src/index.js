@@ -248,7 +248,7 @@ window.addEventListener('DOMContentLoaded', () => {
     presetB3.addEventListener('click', () => initializePreset('B', 60, b3));
 
     const presetB4 = document.body.querySelector('.preset-b4');
-    presetB4.addEventListener('click', () => initializePreset('B', 74, b4));
+    presetB4.addEventListener('click', () => initializePreset('B', 68, b4));
 
     function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
         clear();
