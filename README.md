@@ -15,7 +15,7 @@ Beathoven is an audio sequencer that allows users to easily make instrumental mu
 ![](./assets/wireframes.jpeg)
 
 ## Looping Function
-![Beathoven GIF](./assets/beathoven1.gif =250x250)
+![Beathoven GIF](./assets/beathoven1.gif)
 
 The sequencer grid consists of a series of rows, and each row has 32 pads. By incrementing the variable `columnCounter` at regular intervals and taking its modulo, the function is able to move from one column to the next. After reaching the final column, the `columnCounter` will be incremented once more, `currentColumn` will be set to 0, and the function will continue iterating through each column in the sequencer starting from the beginning again. This is the function's outer loop, and it's what achieves the general 'looping' behavior of the sequencer.
 
