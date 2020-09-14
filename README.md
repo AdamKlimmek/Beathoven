@@ -1,20 +1,20 @@
-# Beathoven
+![](./assets/beathoven_logo.png)
 
-### Background and Overview 
+## Background and Overview 
 Beathoven is an audio sequencer that allows users to easily make instrumental music directly in the browser. It includes various features and functionality, such as the ability to choose from different sound kits, a convenient slider for adjusting BPM, and the option to load built-in presets to get a full sense of what the app can do. The overall functionality and design is complemented by crisp, minimal styling choices that are easy on the eyes while also being clear and engaging to the user. Give it a try and see for yourself!
 
 [Beathoven Live](https://adamklimmek.github.io/Beathoven/)
 
-### Architecture and Technologies
+## Architecture and Technologies
 * JavaScript
 * HTML
 * CSS
 * Tone.js
 
-### Wireframes
+## Wireframes
 ![](./assets/wireframes.jpeg)
 
-### Looping Function
+## Looping Function
 ![Beathoven GIF](./assets/beathoven1.gif)
 
 The sequencer grid consists of a series of rows, and each row has 32 pads. By incrementing the variable `columnCounter` at regular intervals and taking its modulo, the function is able to move from one column to the next. After reaching the final column, the `columnCounter` will be incremented once more, `currentColumn` will be set to 0, and the function will continue iterating through each column in the sequencer starting from the beginning again. This is the function's outer loop, and it's what achieves the general 'looping' behavior of the sequencer.
@@ -65,10 +65,10 @@ Finally, it is worth noting that the function also helps manage the timing of vi
     }
 ```
 
-### Loading Presets
+## Loading Presets
 ![Beathoven GIF](./assets/beathoven2.gif)
 
-To smoothly handle loading a new preset, the `initializePreset()` function proceeds in steps. First, it calls the `clear()` function, which stops playback if the sequencer is currently playing and then iterates through each pad to uncheck its underlying checkbox. From there, the function ensures that the correct sound kit is enabled by calling `enableSoundKitA()` or `enableSoundKitB()`. These two functions will only update `currentSoundKit` if it is necessary. Next, `initializePreset()` checks to see if the sequencer's current BPM value needs to be adjusted. If so, it will call `updateBPM()`, passing in the BPM value associated with the specified preset. After handling any changes that need to be made to the BPM value, the function iterates through `correctCheckboxes`, a nested array passed into the function whichs contains coordinates for each box that needs to be checked. Lastly, the function calls `play()`, which starts the sequencer up from the beginning.
+To smoothly handle loading a new preset, the `initializePreset()` function proceeds in steps. First, it calls the `clear()` function, which stops playback if the sequencer is currently playing and then iterates through each pad to uncheck its underlying checkbox. From there, the function ensures that the correct sound kit is enabled by calling `enableSoundKitA()` or `enableSoundKitB()`. Since `soundKitA` has eight rows and `soundKitB` has 15, these two functions also toggle a 'hidden' value on rows nine through fifteen of the sequencer. That way, if `currentSoundKit` needs to be updated, the number of rows displayed in the sequencer will be updated, too. Next, `initializePreset()` checks to see if the sequencer's current BPM value needs to be adjusted. If so, it will call `updateBPM()`, passing in the BPM value associated with the specified preset. After handling any changes that need to be made to the BPM value, the function iterates through `correctCheckboxes`, a nested array passed into the function whichs contains coordinates for each box that needs to be checked. Lastly, the function calls `play()`, which starts the sequencer up from the beginning.
 
 It may seem strange to have scheduled each of these steps using `setTimeout()`. Personally, I found that doing so helped to minimize visual inconsistencies caused by loading a new preset while the sequencer is currently playing. Ultimately, the `initializePreset()` function reliably accounts for a host of different variables, quickly handles all necessary changes for the user, and does all of this while minimizing visual inconsistencies associated with the styling logic in the looping function.
 
