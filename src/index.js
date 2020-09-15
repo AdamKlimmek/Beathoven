@@ -5,6 +5,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Initial Setup
 
+    let context = Tone.Context();
+    context.resume();
+
     const soundKitA = [];
     (function generateSoundKitA() {
         for (let i = 1; i <= 8; i++) {
