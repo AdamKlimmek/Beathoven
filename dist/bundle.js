@@ -44467,7 +44467,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.addEventListener('DOMContentLoaded', function () {
-  // Initial Setup
+  document.documentElement.addEventListener("mousedown", function () {
+    if (tone__WEBPACK_IMPORTED_MODULE_0__["context"].state !== 'running') {
+      tone__WEBPACK_IMPORTED_MODULE_0__["context"].resume();
+    }
+  });
   var soundKitA = [];
 
   (function generateSoundKitA() {
@@ -44726,7 +44730,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   var presetB4 = document.body.querySelector('.preset-b4');
   presetB4.addEventListener('click', function () {
-    return initializePreset('B', 68, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
+    return initializePreset('B', 70, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
   });
 
   function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {

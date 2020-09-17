@@ -3,10 +3,11 @@ import { a1, a2, a3, b1, b2, b3, b4 } from './presets.js';
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Initial Setup
-
-    let context = Tone.Context();
-    context.resume();
+    document.documentElement.addEventListener("mousedown", () => {
+        if (Tone.context.state !== 'running') {
+            Tone.context.resume();
+        }
+    })
 
     const soundKitA = [];
     (function generateSoundKitA() {
@@ -251,7 +252,7 @@ window.addEventListener('DOMContentLoaded', () => {
     presetB3.addEventListener('click', () => initializePreset('B', 60, b3));
 
     const presetB4 = document.body.querySelector('.preset-b4');
-    presetB4.addEventListener('click', () => initializePreset('B', 68, b4));
+    presetB4.addEventListener('click', () => initializePreset('B', 70, b4));
 
     function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
         clear();
