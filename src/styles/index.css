@@ -119,6 +119,7 @@
     width: 93px;
 }
 
+/* custom styling for range input that accounts for differences between browsers? */
 .bpm-input {
     cursor: pointer;
 }
