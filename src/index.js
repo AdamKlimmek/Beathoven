@@ -295,6 +295,14 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 let currentSynth = soundKitB[row];
                 let currentPitch = pitches[row]
+
+                // let previousPad = currentRow.querySelector(`label:nth-child(${previousColumn + 1})`)
+                // let previousCheckBox = previousPad.querySelector('input')
+
+                // if (!previousCheckBox.checked) {
+                //     if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
+                // }
+
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
         }
