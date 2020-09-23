@@ -301,7 +301,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 // if (!previousCheckBox.checked) {
                 //     if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
-                // }
+                // } 
 
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
