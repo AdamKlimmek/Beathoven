@@ -99,7 +99,7 @@ To smoothly handle loading a new preset, the `initializePreset()` function proce
 
 It may seem strange to have scheduled each of these steps using `setTimeout()`. Personally, I found that doing so helped minimize visual inconsistencies caused by loading a new preset while the sequencer is already playing. Ultimately, the `initializePreset()` function reliably accounts for a host of different variables, quickly handles all necessary changes for the user, and does all of this while minimizing visual inconsistencies associated with the styling logic in the looping function.
 
-### Upcoming Features:
+## Upcoming Features
 The following is a list of additional features I would like to add to the site in the future:
 * More sound kits
 * Dynamic resizing of the sequencer based on screen size
