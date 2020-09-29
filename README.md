@@ -14,7 +14,7 @@
 
 ## Looping Function
 <div align="center">
-    <img src="./assets/looping_function.gif">
+    <img width="838" src="./assets/looping_function.gif">
     <!-- ![Beathoven GIF](./assets/looping_function.gif) -->
 </div>
 
