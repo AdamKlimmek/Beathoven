@@ -44730,7 +44730,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   var presetB4 = document.body.querySelector('.preset-b4');
   presetB4.addEventListener('click', function () {
-    return initializePreset('B', 70, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
+    return initializePreset('B', 72, _presets_js__WEBPACK_IMPORTED_MODULE_1__["b4"]);
   });
 
   function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
@@ -44746,8 +44746,10 @@ window.addEventListener('DOMContentLoaded', function () {
         var currentBox = document.getElementsByClassName("row-".concat(coords[0], " col-").concat(coords[1]))[0];
         currentBox.checked = true;
       });
-      play();
     }, 300);
+    setTimeout(function () {
+      play();
+    }, 350);
   } // Looping Function
 
 
@@ -44769,10 +44771,10 @@ window.addEventListener('DOMContentLoaded', function () {
       } else {
         var currentSynth = soundKitB[row];
         var currentPitch = pitches[row]; // let previousPad = currentRow.querySelector(`label:nth-child(${previousColumn + 1})`)
-        // let previousCheckBox = previousPad.querySelector('input')
+        // let previousCheckBox = previousPad.querySelector('input')  
         // if (!previousCheckBox.checked) {
         //     if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
-        // }
+        // }  
 
         if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
       }

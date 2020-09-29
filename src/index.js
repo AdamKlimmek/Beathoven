@@ -252,7 +252,7 @@ window.addEventListener('DOMContentLoaded', () => {
     presetB3.addEventListener('click', () => initializePreset('B', 60, b3));
 
     const presetB4 = document.body.querySelector('.preset-b4');
-    presetB4.addEventListener('click', () => initializePreset('B', 70, b4));
+    presetB4.addEventListener('click', () => initializePreset('B', 72, b4));
 
     function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
         clear();
@@ -270,9 +270,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
                 currentBox.checked = true;
             })
-    
-            play();
         }, 300);
+
+        setTimeout(() => { play(); }, 350);
     }
 
     // Looping Function
