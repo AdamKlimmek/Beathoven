@@ -67,7 +67,7 @@ Lastly, while this may serve as an outline of the function's general behavior, p
 
 ## Loading Presets
 <div align="center">
-    <img width="838" src="./assets/loading_presets.gif">
+    <img width="838" src="./assets/load_presets.gif">
 </div>
 
 To smoothly handle loading a new preset, the `initializePreset()` function proceeds in steps. First, it calls the `clear()` function, which stops playback if the sequencer is currently playing and then iterates through each pad to uncheck its underlying checkbox. From there, the function ensures that the correct sound kit is enabled by calling `enableSoundKitA()` or `enableSoundKitB()`. Since `soundKitA` has eight rows and `soundKitB` has 15, these two functions also toggle a 'hidden' value on rows nine through fifteen of the sequencer. That way, if `currentSoundKit` needs to be updated, the number of rows displayed in the sequencer will be updated, too. Next, `initializePreset()` checks to see if the sequencer's current BPM value needs to be adjusted. If so, it will call `updateBPM()`, passing in the BPM value associated with the specified preset. After handling any changes that need to be made to the BPM value, the function iterates through `correctCheckboxes`, a two-dimensional array passed into the function whichs contains coordinates for each checkbox input that needs to be checked. Lastly, the function calls `play()`, which starts the sequencer up from the beginning.
