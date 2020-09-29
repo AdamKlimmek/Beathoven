@@ -14,7 +14,8 @@
 
 ## Looping Function
 <div align="center">
-    ![Beathoven GIF](./assets/looping_function.gif)
+    <img src="./assets/looping_function.gif">
+    <!-- ![Beathoven GIF](./assets/looping_function.gif) -->
 </div>
 
 The sequencer grid consists of a series of rows, and each row has 32 pads. By incrementing the variable `columnCounter` at regular intervals and taking its modulo, the function is able to move from one column to the next. After reaching the final column, the `columnCounter` will be incremented once more, `currentColumn` will be set to 0, and the function will continue iterating through each column in the sequencer starting from the beginning again. This is the function's outer loop, and it's what achieves the general 'looping' behavior of the sequencer.
