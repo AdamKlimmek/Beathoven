@@ -280,7 +280,7 @@ window.addEventListener('DOMContentLoaded', () => {
     Tone.Transport.scheduleRepeat(runSequence, '16n')
 
     function runSequence(time) {
-        let currentColumn = columnCounter % 32
+        let currentColumn = columnCounter % 32;
 
         for (let row = 0; row < rows.length; row++) {
             let currentRow = rows[row];

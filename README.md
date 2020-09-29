@@ -13,9 +13,9 @@
 ![](./assets/wireframes.jpeg)
 
 ## Looping Function
-<p align="center">
+<div align="center">
     ![Beathoven GIF](./assets/looping_function.gif)
-</p>
+</div>
 
 The sequencer grid consists of a series of rows, and each row has 32 pads. By incrementing the variable `columnCounter` at regular intervals and taking its modulo, the function is able to move from one column to the next. After reaching the final column, the `columnCounter` will be incremented once more, `currentColumn` will be set to 0, and the function will continue iterating through each column in the sequencer starting from the beginning again. This is the function's outer loop, and it's what achieves the general 'looping' behavior of the sequencer.
 
@@ -31,7 +31,7 @@ The function also helps manage the timing of visual events related to styling. T
     Tone.Transport.scheduleRepeat(runSequence, '16n')
 
     function runSequence(time) {
-        let currentColumn = columnCounter % 32
+        let currentColumn = columnCounter % 32;
 
         for (let row = 0; row < rows.length; row++) {
             let currentRow = rows[row];
