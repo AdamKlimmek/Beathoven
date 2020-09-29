@@ -272,7 +272,7 @@ window.addEventListener('DOMContentLoaded', () => {
             })
         }, 300);
 
-        setTimeout(() => { play(); }, 350);
+        setTimeout(() => { play() }, 350);
     }
 
     // Looping Function

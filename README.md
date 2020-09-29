@@ -1,4 +1,6 @@
-![](./assets/beathoven_logo.png)
+<div align="center">
+    <img width="838" src="./assets/logo.png">
+</div>
 
 ## Background and Overview 
 [Beathoven](https://adamklimmek.github.io/Beathoven/) is an audio sequencer that allows users to easily make instrumental music directly in the browser. It includes various features and functionality, such as the ability to choose from different sound kits, a convenient slider for adjusting BPM, and the option to load built-in presets to get a full sense of what the app can do. The overall functionality and design is complemented by crisp, minimal styling choices that are easy on the eyes while also being clear and engaging to the user. Give it a try and see for yourself!
@@ -91,7 +93,7 @@ To smoothly handle loading a new preset, the `initializePreset()` function proce
             })
         }, 300);
 
-        setTimeout(() => { play(); }, 350);
+        setTimeout(() => { play() }, 350);
     }
 ```
 
