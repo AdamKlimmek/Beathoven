@@ -15,7 +15,6 @@
 ## Looping Function
 <div align="center">
     <img width="838" src="./assets/looping_function.gif">
-    <!-- ![Beathoven GIF](./assets/looping_function.gif) -->
 </div>
 
 The sequencer grid consists of a series of rows, and each row has 32 pads. By incrementing the variable `columnCounter` at regular intervals and taking its modulo, the function is able to move from one column to the next. After reaching the final column, the `columnCounter` will be incremented once more, `currentColumn` will be set to 0, and the function will continue iterating through each column in the sequencer starting from the beginning again. This is the function's outer loop, and it's what achieves the general 'looping' behavior of the sequencer.
@@ -67,7 +66,9 @@ The function also helps manage the timing of visual events related to styling. T
 Lastly, while this may serve as an outline of the function's general behavior, perhaps a bit more can be said about the 'scheduling' of audio playback. Among the other things it provides, Tone.js offers a way to create uniform audio playback with precise timing. First, `Tone.Transport` helps construct a kind of musical timeline, and `scheduleRepeat` is used to arrange audio events at regular intervals in this timeline. `Tone.Transport` can also store a BPM value (which is set to 120 by default). Together, this BPM value and the specified time interval (e.g., '16n') allow Tone to pinpoint when a musical event should occur. With this information in hand, Tone is able to coordinate with the Web Audio API's `AudioContext` and ultimately create synchronized audio playback despite JavaScript's asynchronicity.
 
 ## Loading Presets
-![Beathoven GIF](./assets/loading_presets.gif)
+<div align="center">
+    <img width="838" src="./assets/loading_presets.gif">
+</div>
 
 To smoothly handle loading a new preset, the `initializePreset()` function proceeds in steps. First, it calls the `clear()` function, which stops playback if the sequencer is currently playing and then iterates through each pad to uncheck its underlying checkbox. From there, the function ensures that the correct sound kit is enabled by calling `enableSoundKitA()` or `enableSoundKitB()`. Since `soundKitA` has eight rows and `soundKitB` has 15, these two functions also toggle a 'hidden' value on rows nine through fifteen of the sequencer. That way, if `currentSoundKit` needs to be updated, the number of rows displayed in the sequencer will be updated, too. Next, `initializePreset()` checks to see if the sequencer's current BPM value needs to be adjusted. If so, it will call `updateBPM()`, passing in the BPM value associated with the specified preset. After handling any changes that need to be made to the BPM value, the function iterates through `correctCheckboxes`, a two-dimensional array passed into the function whichs contains coordinates for each checkbox input that needs to be checked. Lastly, the function calls `play()`, which starts the sequencer up from the beginning.
 
