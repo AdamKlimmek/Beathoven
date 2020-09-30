@@ -65,7 +65,7 @@ The function also helps manage the timing of visual events related to styling. T
     }
 ```
 
-Lastly, while this may serve as an outline of the function's general behavior, perhaps a bit more can be said about the 'scheduling' of audio playback. Among the other things it provides, Tone.js offers a way to create uniform audio playback with precise timing. First, `Tone.Transport` helps construct a kind of musical timeline, and `scheduleRepeat` is used to arrange audio events at regular intervals in this timeline. `Tone.Transport` can also store a BPM value (which is set to 120 by default). Together, this BPM value and the specified time interval (e.g., '16n') allow Tone to pinpoint when a musical event should occur. With this information in hand, Tone is able to coordinate with the Web Audio API's `AudioContext` and ultimately create synchronized audio playback despite JavaScript's asynchronicity.
+Lastly, while this may serve as an outline of the function's general behavior, perhaps a bit more can be said about the 'scheduling' of audio playback. Due to JavaScript's asynchronicity, timing can be quite imprecise. Fortunately, the Web Audio API provides precise, sample-accurate scheduling. However, in the Web Audio API, all time values are in terms of the `AudioContext`'s time, which starts at 0 when the page is loaded and counts upward in seconds. Although this is convenient for most purposes, it does not readily lend itself to musical timing. By default, all musical events--e.g., playing an eighth note on the second beat of measure four--need to be converted to seconds in order for the Web Audio API to handle them properly. Between accounting for BPM, time signatures, note values, and so on, this conversion process can prove to be rather cumbersome. Fortunately, Tone.js handles this time conversion process for the user and therefore abstracts away the need to interact with the `AudioContext` directly. Instead, `Tone.Transport` serves as the master timekeeper, allowing the user to think about things in terms of musical time, making it easier to schedule musical events. Along with the musical timeline that `Tone.Transport` provides, `scheduleRepeat` can be used to arrange audio events at regular intervals in the timeline. In this way, Tone.js offers a way to create uniform audio playback with precise timing despite JavaScript's asynchronicity.
 
 ## Loading Presets
 <div align="center">
@@ -75,29 +75,29 @@ Lastly, while this may serve as an outline of the function's general behavior, p
 To smoothly handle loading a new preset, the `initializePreset()` function proceeds in steps. First, it calls the `clear()` function, which stops playback if the sequencer is currently playing and then iterates through each pad to uncheck its underlying checkbox. From there, the function ensures that the correct sound kit is enabled by calling `enableSoundKitA()` or `enableSoundKitB()`. Since `soundKitA` has eight rows and `soundKitB` has 15, these two functions also toggle a 'hidden' value on rows nine through fifteen of the sequencer. That way, if `currentSoundKit` needs to be updated, the number of rows displayed in the sequencer will be updated, too. Next, `initializePreset()` checks to see if the sequencer's current BPM value needs to be adjusted. If so, it will call `updateBPM()`, passing in the BPM value associated with the specified preset. After handling any changes that need to be made to the BPM value, the function iterates through `correctCheckboxes`, a two-dimensional array passed into the function whichs contains coordinates for each checkbox input that needs to be checked. Lastly, the function calls `play()`, which starts the sequencer up from the beginning.
 
 ``` javascript
-    function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
-        clear();
+function initializePreset(correctSoundKit, correctBPM, correctCheckboxes) {
+    clear();
 
-        setTimeout(() => {
-            (correctSoundKit === 'A') ? enableSoundKitA() : enableSoundKitB();
-        }, 200);
-            
-        setTimeout(() => {
-            if (Tone.Transport.bpm.value !== correctBPM) updateBPM(correctBPM);
-        }, 250);
+    setTimeout(() => {
+        (correctSoundKit === 'A') ? enableSoundKitA() : enableSoundKitB();
+    }, 150);
+        
+    setTimeout(() => {
+        if (Tone.Transport.bpm.value !== correctBPM) updateBPM(correctBPM);
+    }, 175);
 
-        setTimeout(() => {
-            correctCheckboxes.forEach((coords) => {
-                let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
-                currentBox.checked = true;
-            })
-        }, 300);
+    setTimeout(() => {
+        correctCheckboxes.forEach((coords) => {
+            let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
+            currentBox.checked = true;
+        })
+    }, 200);
 
-        setTimeout(() => { play() }, 350);
-    }
+    setTimeout(() => { play() }, 225);
+}
 ```
 
-It may seem strange to have scheduled each of these steps using `setTimeout()`. Personally, I found that doing so helped minimize visual inconsistencies caused by loading a new preset while the sequencer is already playing. Ultimately, the `initializePreset()` function reliably accounts for a host of different variables, quickly handles all necessary changes for the user, and does all of this while minimizing visual inconsistencies associated with the styling logic in the looping function.
+It may seem strange to have scheduled each of these steps using `setTimeout()`. Personally, I found that doing so helped avoid issues related to asynchronicity and also minimize certain visual inconsistencies. Ultimately, the `initializePreset()` function reliably accounts for a number of different variables, quickly handles all necessary changes for the user, and minimizes the chances of any buggy behavior in the sequencer based on user input.
 
 ## Upcoming Features
 The following is a list of additional features I would like to add to the site in the future:

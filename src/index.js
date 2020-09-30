@@ -87,7 +87,6 @@ window.addEventListener('DOMContentLoaded', () => {
             row.className = 'sequencer-row';
             if (i > 7) row.classList.add('hidden');
             
-
             for (let j = 0; j < 32; j++) {
                 let label = document.createElement('label');
 
@@ -108,7 +107,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
 
     const rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
-    const checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
+    const allPads = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
     let columnCounter = 0;
 
     (function generateBeatCounterDisplay() {
@@ -130,6 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
     stopButton.addEventListener('click', () => stop());
 
     function play() {
+        columnCounter = 0;
         Tone.Transport.start();
         playButton.classList.add('hidden');
         stopButton.classList.remove('hidden');
@@ -140,8 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
         playButton.classList.remove('hidden');
         stopButton.classList.add('hidden');
         setTimeout(() => {
-            columnCounter = 0;
-            checkboxes.forEach(checkbox => { checkbox.classList.remove('active') })
+            allPads.forEach(checkbox => { checkbox.classList.remove('active') })
         }, 100);
     }
 
@@ -154,8 +153,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         setTimeout(() => {
-            checkboxes.forEach(checkbox => { checkbox.checked = false; })
-        }, 150);
+            allPads.forEach(checkbox => { checkbox.checked = false; })
+        }, 125);
     }
 
     const bpmInput = document.body.querySelector('.bpm-input');
@@ -259,20 +258,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             (correctSoundKit === 'A') ? enableSoundKitA() : enableSoundKitB();
-        }, 200);
+        }, 150);
             
         setTimeout(() => {
             if (Tone.Transport.bpm.value !== correctBPM) updateBPM(correctBPM);
-        }, 250);
+        }, 175);
 
         setTimeout(() => {
             correctCheckboxes.forEach((coords) => {
                 let currentBox = document.getElementsByClassName(`row-${coords[0]} col-${coords[1]}`)[0];
                 currentBox.checked = true;
             })
-        }, 300);
+        }, 200);
 
-        setTimeout(() => { play() }, 350);
+        setTimeout(() => { play() }, 225);
     }
 
     // Looping Function
@@ -294,15 +293,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 let currentSynth = soundKitB[row];
-                let currentPitch = pitches[row]
-
-                // let previousPad = currentRow.querySelector(`label:nth-child(${previousColumn + 1})`)
-                // let previousCheckBox = previousPad.querySelector('input')  
-
-                // if (!previousCheckBox.checked) {
-                //     if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
-                // }  
-
+                let currentPitch = pitches[row];
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
         }

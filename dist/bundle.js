@@ -44566,7 +44566,7 @@ window.addEventListener('DOMContentLoaded', function () {
   })();
 
   var rows = Array.from(document.body.querySelectorAll('.sequencer-row'));
-  var checkboxes = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
+  var allPads = Array.from(document.body.querySelectorAll('.sequencer-row-checkbox'));
   var columnCounter = 0;
 
   (function generateBeatCounterDisplay() {
@@ -44591,6 +44591,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 
   function play() {
+    columnCounter = 0;
     tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].start();
     playButton.classList.add('hidden');
     stopButton.classList.remove('hidden');
@@ -44601,8 +44602,7 @@ window.addEventListener('DOMContentLoaded', function () {
     playButton.classList.remove('hidden');
     stopButton.classList.add('hidden');
     setTimeout(function () {
-      columnCounter = 0;
-      checkboxes.forEach(function (checkbox) {
+      allPads.forEach(function (checkbox) {
         checkbox.classList.remove('active');
       });
     }, 100);
@@ -44619,10 +44619,10 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     setTimeout(function () {
-      checkboxes.forEach(function (checkbox) {
+      allPads.forEach(function (checkbox) {
         checkbox.checked = false;
       });
-    }, 150);
+    }, 125);
   }
 
   var bpmInput = document.body.querySelector('.bpm-input');
@@ -44737,19 +44737,19 @@ window.addEventListener('DOMContentLoaded', function () {
     clear();
     setTimeout(function () {
       correctSoundKit === 'A' ? enableSoundKitA() : enableSoundKitB();
-    }, 200);
+    }, 150);
     setTimeout(function () {
       if (tone__WEBPACK_IMPORTED_MODULE_0__["Transport"].bpm.value !== correctBPM) updateBPM(correctBPM);
-    }, 250);
+    }, 175);
     setTimeout(function () {
       correctCheckboxes.forEach(function (coords) {
         var currentBox = document.getElementsByClassName("row-".concat(coords[0], " col-").concat(coords[1]))[0];
         currentBox.checked = true;
       });
-    }, 300);
+    }, 200);
     setTimeout(function () {
       play();
-    }, 350);
+    }, 225);
   } // Looping Function
 
 
@@ -44770,12 +44770,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
       } else {
         var currentSynth = soundKitB[row];
-        var currentPitch = pitches[row]; // let previousPad = currentRow.querySelector(`label:nth-child(${previousColumn + 1})`)
-        // let previousCheckBox = previousPad.querySelector('input')  
-        // if (!previousCheckBox.checked) {
-        //     if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
-        // }  
-
+        var currentPitch = pitches[row];
         if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
       }
     }
