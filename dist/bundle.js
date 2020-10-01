@@ -44546,16 +44546,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
     for (var i = 0; i < 15; i++) {
       var row = document.createElement('div');
-      row.className = 'sequencer-row';
+      row.classList.add('sequencer-row');
       if (i > 7) row.classList.add('hidden');
 
       for (var j = 0; j < 32; j++) {
         var label = document.createElement('label');
         var input = document.createElement('input');
         input.type = 'checkbox';
-        input.className = "sequencer-row-checkbox row-".concat(i, " col-").concat(j);
+        input.classList.add("sequencer-row-checkbox", "row-".concat(i), "col-".concat(j));
         var span = document.createElement('span');
-        span.className = 'sequencer-row-pad';
+        span.classList.add('sequencer-row-pad');
         label.appendChild(input);
         label.appendChild(span);
         row.appendChild(label);

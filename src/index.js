@@ -84,18 +84,18 @@ window.addEventListener('DOMContentLoaded', () => {
         let sequencerRows = document.body.querySelector('.sequencer-rows');
         for (let i = 0; i < 15; i++) {
             let row = document.createElement('div');
-            row.className = 'sequencer-row';
+            row.classList.add('sequencer-row');
             if (i > 7) row.classList.add('hidden');
             
             for (let j = 0; j < 32; j++) {
                 let label = document.createElement('label');
 
                 let input = document.createElement('input');
-                input.type = 'checkbox'
-                input.className = `sequencer-row-checkbox row-${i} col-${j}`;
+                input.type = 'checkbox';
+                input.classList.add(`sequencer-row-checkbox`,`row-${i}`,`col-${j}`);
 
                 let span = document.createElement('span');
-                span.className = 'sequencer-row-pad';
+                span.classList.add('sequencer-row-pad');
 
                 label.appendChild(input);
                 label.appendChild(span);
