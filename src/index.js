@@ -293,7 +293,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 let currentSynth = soundKitB[row];
-                let currentPitch = pitches[row];
+                let currentPitch = pitches[row]; 
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
         }
