@@ -44516,7 +44516,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   (function generateSampleButtonEventListeners() {
     sampleButtons.forEach(function (button, i) {
-      button.addEventListener('click', function () {
+      button.addEventListener('mousedown', function () {
         if (currentSoundKit === 'A') {
           soundKitA[i].start();
         } else {

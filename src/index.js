@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let currentSoundKit = 'A';
     (function generateSampleButtonEventListeners() {
         sampleButtons.forEach((button, i) => {
-            button.addEventListener('click', () => {
+            button.addEventListener('mousedown', () => {
                 if (currentSoundKit === 'A') {
                     soundKitA[i].start();
                 } else {
