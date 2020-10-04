@@ -47,7 +47,7 @@ The function also helps manage the timing of visual events related to styling. T
                 }
             } else {
                 let currentSynth = soundKitB[row];
-                let currentPitch = pitches[row]
+                let currentPitch = pitches[row];
                 if (currentCheckBox.checked) currentSynth.triggerAttackRelease(currentPitch, '16n');
             }
         }
