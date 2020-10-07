@@ -168,7 +168,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function updateBPM(val) {
         bpmInput.value = val;
         bpmOutput.innerHTML = val;
-        Tone.Transport.bpm.value = val;
+        Tone.Transport.bpm.value = val; 
     }
 
     const soundKitAButton = document.body.querySelector('.sound-kit-a-toggle');
