@@ -77,6 +77,10 @@
     transform: scale(1.15);
 }
 
+.user-icon {
+    font-size: 22.5px;
+}
+
 .sequencer {
     display: flex;
     flex-direction: column;
